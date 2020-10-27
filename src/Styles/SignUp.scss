@@ -1,0 +1,25 @@
+// @use "registerLayout";
+
+.signup{
+    // @include regContainer;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    height: 30rem;
+    justify-content: space-between;
+}
+
+.signup_heading{
+    // @include regHeading;
+    font-size: 2rem;
+    margin-top: 25px;
+}
+
+.signup_form{
+    // @include regForm;
+    width: 80%;
+    Button{
+        width: 70%;
+        margin-left: 15%;
+    }
+}

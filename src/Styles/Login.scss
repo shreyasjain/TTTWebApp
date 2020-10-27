@@ -1,0 +1,20 @@
+.login{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    height: 30rem;
+    justify-content: space-between;
+}
+
+.login_heading{
+    font-size: 2rem;
+    margin-top: 25px;
+}
+
+.login_form{
+    width: 80%;
+    Button{
+        width: 70%;
+        margin-left: 15%;
+    }
+}

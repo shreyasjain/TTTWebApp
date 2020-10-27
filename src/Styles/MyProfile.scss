@@ -1,0 +1,55 @@
+.myProfile{
+    text-align: center;
+}
+
+.myProfile_heading strong{
+    font-size: 2rem;
+    margin-top: 25px;
+    
+}
+
+.myProfile_banner{
+    width: 100%;
+    height: 10rem;
+    background-color: #7878e1;
+    border-bottom-left-radius: 2rem;
+    border-bottom-right-radius: 2rem;
+    margin-bottom: -7rem;
+}
+
+.myProfile_dp{
+    display: flex;
+    flex-direction: column;
+    .myProfile_pic{
+    width: 10rem;
+    height: 10rem;
+    border-radius: 0.5rem;
+    margin-right: auto;
+    margin-left: auto;
+    img{
+        height:10rem;
+        width:10rem;
+        box-shadow: 0px 0px 10px 5px grey;
+    }
+    }
+    a{
+        margin-top: 10px;
+    }
+}
+
+.myProfile_details{
+    display: flex;
+    flex-direction: column;
+    h4,h5,h6{
+        margin: 15px !important;
+    }
+    a{
+        margin-top: 50px;
+    }
+}
+
+
+
+@media (max-width:425px){
+    
+}

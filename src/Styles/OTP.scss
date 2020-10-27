@@ -1,0 +1,20 @@
+.otp{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    height: 20rem;
+    justify-content: space-between;
+}
+
+.otp_heading{
+    font-size: 2rem;
+    margin-top: 25px;
+}
+
+.otp_form{
+    width: 80%;
+    Button{
+        width: 70%;
+        margin-left: 15%
+    }
+}

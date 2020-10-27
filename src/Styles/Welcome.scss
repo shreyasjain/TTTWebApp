@@ -1,0 +1,76 @@
+.welcome{
+    display: flex;
+    align-items: center;
+    padding: 20px;
+}
+
+.welcome_banner{
+    width: 60%;
+    img {
+        vertical-align: middle;
+        border-style: none;
+        width: 90%;
+        object-fit: cover;
+        height: 500px;
+        border: 3px solid #195269;
+    }
+}
+
+.welcome_buttons {
+    display: flex;
+    flex-direction: column;
+    width: 35%;
+    strong{
+        align-self: center;
+    }
+    .welcome_button{
+        margin-top: 15px;
+    }
+    .welcome-signup-button{
+    border: 0px !important;
+    }
+}
+
+
+
+
+@media (max-width:720px) and (min-width:476px){
+    .welcome{
+        strong{
+            font-size: 1.2rem !important;
+        }
+    }
+}
+
+@media (max-width:505px){
+    .welcome{
+        flex-direction: column;
+        padding: 0px;
+    }
+
+    .welcome_banner{
+        width: 100%;
+        margin-bottom: 10px;
+        img {
+            width: 100%;
+            height: 25rem;
+        }
+    }
+
+    .welcome_buttons{
+        width: 100%;
+        Button{
+            width: 70%;
+            align-self: center;
+        }
+    }
+
+}
+
+@media (max-width:250px){
+    .welcome{
+        strong{
+            font-size: 1rem !important;
+        }
+    }
+}
