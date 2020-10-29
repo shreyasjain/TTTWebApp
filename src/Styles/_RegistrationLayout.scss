@@ -6,14 +6,18 @@
     justify-content: space-between;
 }
 
-@mixin regHeading{
-    font-size: 2rem;
+@mixin regHeading{ 
     margin-top: 25px;
+    h1 {
+        font-size: 2rem;
+        font-weight: bolder;
+    }
 }
 
 @mixin regForm{
     width: 80%;
     Button{
         width: 70%;
+        margin-left: 15%;
     }
 }

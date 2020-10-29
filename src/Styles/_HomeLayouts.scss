@@ -1,0 +1,26 @@
+@mixin appHeader {
+    font-size: 1.75rem;
+}
+
+@mixin home {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 20rem;
+    text-align: center;
+}
+
+@mixin profile_pic {
+    display: flex;
+    flex-direction: column;
+    a{
+        margin-top: 10px;
+    }
+    .myProfile_pic{
+    width: 10rem;
+    height: 10rem;
+    border-radius: 0.5rem;
+    margin-right: auto;
+    margin-left: auto;
+    }
+}

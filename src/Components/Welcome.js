@@ -10,7 +10,7 @@ function Welcome() {
                 <img src={require("../Media/welcome.png")} />
             </div>
             <div className="welcome_buttons">
-                <strong>Table Tennis Pros</strong>
+                <strong><p className="welcome_heading">Table Tennis Pros</p></strong>
                 <Button className="welcome_button" variant="primary" as={Link} to="/login">Login</Button>
                 <Button className="welcome_button welcome-signup-button" variant="outline-primary" as={Link} to="/signup">SignUp</Button>
             </div>

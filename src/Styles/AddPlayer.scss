@@ -1,3 +1,5 @@
+@import "HomeLayouts";
+
 .addPlayer{
     display: flex;
     flex-direction: column;
@@ -7,35 +9,24 @@
 }
 
 .addPlayers_heading{
-    border-bottom: 1px solid lightgray;
-    
-    strong{
-        font-size: 1.5rem;
-        margin-top: 25px;
-        
-    }
+    @include appHeader;
 } 
 
+.row{
+    flex-wrap: nowrap;;
+}
+
+.col-sm-2{
+    width: auto; 
+}
 
 .myProfile_dp{
-    display: flex;
-    flex-direction: column;
-    margin: 50px;
-    .myProfile_pic{
-    width: 10rem;
-    height: 10rem;
-    border-radius: 0.5rem;
-    margin-right: auto;
-    margin-left: auto;
-    img{
-        height: 8rem;
-        width: 8rem;
+    @include profile_pic;
+    .myProfile_pic img{
+        height: 6rem;
+        width: 6rem;
         box-shadow: 0px 0px 10px 0px grey;
         border-radius: 4rem;
-    }
-    }
-    a{
-        margin-top: 10px;
     }
 }
 

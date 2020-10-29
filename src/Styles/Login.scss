@@ -1,20 +1,13 @@
+@import "RegistrationLayout";
+
 .login{
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    height: 30rem;
-    justify-content: space-between;
+    @include regContainer;
 }
 
 .login_heading{
-    font-size: 2rem;
-    margin-top: 25px;
+    @include regHeading;
 }
 
 .login_form{
-    width: 80%;
-    Button{
-        width: 70%;
-        margin-left: 15%;
-    }
+    @include regForm;
 }

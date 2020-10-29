@@ -1,20 +1,14 @@
+@import "RegistrationLayout";
+
 .otp{
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    height: 20rem;
-    justify-content: space-between;
+    @include regContainer;
+    justify-content: space-evenly;
 }
 
 .otp_heading{
-    font-size: 2rem;
-    margin-top: 25px;
+    @include regHeading;
 }
 
 .otp_form{
-    width: 80%;
-    Button{
-        width: 70%;
-        margin-left: 15%
-    }
+    @include regForm;
 }

@@ -1,17 +1,12 @@
+@import "HomeLayouts";
+
 .players{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 20rem;
-    text-align: center;
+    @include home;
 }
 
 .players_heading{
     border-bottom: 1px solid lightgray;
-    
     strong{
-        font-size: 2rem;
-        margin-top: 25px;
-        
+        @include appHeader;
     }
 } 
