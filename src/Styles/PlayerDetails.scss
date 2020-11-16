@@ -1,0 +1,69 @@
+@import "HomeLayouts";
+
+.player_details_heading{
+    border-bottom: 1px solid lightgray;
+    strong{
+        @include appHeader;
+    }
+}
+
+.other_details{
+    text-align: left;
+    margin-left: 1.5rem;
+}
+
+.player_details{
+    margin: 0;
+    text-align: center;
+    .span_l{
+        color: dimgray;
+        line-height: 50px;
+    }
+}
+
+.player_details_card{
+    display: flex;
+    flex-direction: row;
+    margin: 15px;
+    justify-content: start;
+    padding: 15px;
+}
+
+.player_main_details{
+    text-align: left;
+}
+
+.tc_pic img {
+    vertical-align: middle;
+    border-style: none;
+    height: 100px;
+    width: 100px;
+    border-radius: 50px;
+    margin-left: 0px;
+    margin-right: 3rem;
+    box-shadow: 0px 0px 10px grey;
+}
+
+.player_details_container{
+    // display: flex;
+}
+
+.playedInTournament {
+    width: 13rem;
+    p{
+        text-align: left;
+        margin: 15px;
+        font-size: 15px;
+    }
+}
+
+.playedInTournament ::after{
+    content:"";
+    display: inline-block;
+    height: 0.5em;
+    vertical-align: middle;
+    width: 100%;
+    margin-right: -100%;
+    margin-left: 10px;
+    border-top: 1px solid black;
+}

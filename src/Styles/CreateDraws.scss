@@ -1,0 +1,16 @@
+@import "HomeLayouts";
+
+.create_draws_heading{
+    border-bottom: 1px solid lightgray;
+    text-align: center;
+    strong{
+        @include appHeader;
+    }
+}
+
+.create_draws_top_elements{
+    padding: 10px;
+    .col-sm-2 {
+        width: 10rem;
+    }
+}

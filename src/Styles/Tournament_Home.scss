@@ -6,7 +6,53 @@
 
 .tournament_heading{
     border-bottom: 1px solid lightgray;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 3rem;
     strong{
         @include appHeader;
     }
 } 
+
+.tournament_available{
+    @include home;
+}
+
+.tournament_buttons_top{
+    display: flex;
+    flex-wrap: nowrap;
+    button{
+        width: 100%;
+        height: 40px;
+        background-color: white;
+        border: solid white;
+        font-size: small;
+        color: gray;
+        border-bottom: 1px solid lightgray;
+    }
+}
+
+.btn-group{
+    width: 100%;
+}
+
+#fixedbutton {
+    position: fixed;
+    bottom: 85px;
+    right: 50px;
+    background: #007bff;
+    height: 50px;
+    width: 50px;
+    border-radius: 25px;
+    text-align: center;
+    color: white;
+    font-size: 35px;
+}
+
+
+btn-secondary:not(:disabled):not(.disabled).active, .btn-secondary:not(:disabled):not(.disabled):active, .show>.btn-secondary.dropdown-toggle {
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+}

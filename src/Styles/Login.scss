@@ -11,3 +11,9 @@
 .login_form{
     @include regForm;
 }
+
+.login_footer_note{
+    position: fixed;
+    bottom: 5px;
+    font-size: 1rem;
+}

@@ -1,0 +1,40 @@
+.create_draw_card{
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    .player_card{
+        margin: 5px;
+        padding: 5px;
+        justify-content: space-between;
+    }    
+    
+    .tc_pic img{
+        height: 50px;
+        width: 50px;
+        border-radius: 26px;
+        margin-left: 10px;
+        margin-right: 1rem;
+    }
+
+    .player_details{
+        text-align: left;
+        p{
+            margin-bottom: 0;
+        }
+    }
+}
+
+.player_card_row1{
+    display: flex;
+}
+
+.player_card_row1_data{
+    display: flex;
+}
+
+.player_card_row2{
+    margin-top: 15px;
+    margin-left: 5px;
+}

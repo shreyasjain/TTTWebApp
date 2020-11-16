@@ -1,0 +1,13 @@
+@import "HomeLayouts";
+
+.matches_heading{
+    border-bottom: 1px solid lightgray;
+    text-align: center;
+    strong{
+        @include appHeader;
+    }
+}
+
+.matches_elements{
+    margin: 10px;
+}

@@ -1,0 +1,87 @@
+@import "HomeLayouts";
+
+.match-screen_heading{
+    border-bottom: 1px solid lightgray;
+    text-align: center;
+    strong{
+        @include appHeader;
+    }
+}
+
+.match-screen-container{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    height: -webkit-fill-available;
+    position: absolute;
+    width: 100%;
+}
+
+.match_screen_team1, .match_screen_team2 {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid lightgray;
+    width: 100%;
+    text-align: center;
+    padding-top: 25px;
+    img{
+        vertical-align: middle;
+        border-style: none;
+        height: 5rem;
+        width: 5rem;
+        align-self: center;
+        border-radius: 3rem;
+        margin-top: 30px;
+        margin-bottom: 30px;
+    }
+}
+
+.match-screen-versus{
+    height: 3rem;
+    width: 3rem;
+    background: #e4e6e7;
+    border-radius: 2rem;
+    text-align: center;
+    margin: auto;
+    position: absolute;
+    top: 0;
+    bottom: 15rem;
+    left: 0;
+    right: 0;
+    margin: auto;
+    span{
+        vertical-align: -webkit-baseline-middle;
+        font-size: 17px;
+    }
+}
+
+.container-1{
+    position: relative;
+}
+
+.match_screen_score_comparisons{
+    margin: auto;
+    top: 0;
+    bottom: 0px;
+    left: 0;
+    right: 0;
+    position: absolute;
+    justify-content: space-evenly;
+    display: flex;
+    flex-direction: column;
+    margin-top: 20rem;
+    width: 8rem;
+}
+
+.match_screen_score_comparison1,
+.match_screen_score_comparison2,
+.match_screen_score_comparison3 {
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid #aeb4b7;
+    padding-left: 5px;
+    padding-right: 5px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px grey;
+    background: white;
+}

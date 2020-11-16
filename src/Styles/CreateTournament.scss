@@ -1,0 +1,25 @@
+@import "HomeLayouts";
+
+.create_tournament_heading{
+    border-bottom: 1px solid lightgray;
+    text-align: center;
+    strong{
+        @include appHeader;
+    }
+}
+
+.create-tournament{
+    text-align: center;
+}
+
+.create_tournament_checkboxes{
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+    h5{
+        padding-top: 15px;
+        padding-bottom: 15px;
+        font-size: 18px;
+        font-weight: bold;
+    }
+}
