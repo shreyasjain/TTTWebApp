@@ -1,7 +1,7 @@
 @import "HomeLayouts";
 
 .player_details_heading{
-    border-bottom: 1px solid lightgray;
+    @include backBtnHeading;
     strong{
         @include appHeader;
     }

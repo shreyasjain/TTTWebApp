@@ -1,7 +1,7 @@
 @import "HomeLayouts";
 
 .tournament_details_heading{
-    border-bottom: 1px solid lightgray;
+    @include backBtnHeading;
     strong{
         @include appHeader;
     }
@@ -75,7 +75,7 @@
 
 .played_tournaments{
     text-align: left;
-    padding: 25px;
+    // padding: 25px;
     padding-top: 10px;
     span{
         line-height: 2;

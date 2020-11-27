@@ -2,7 +2,8 @@
 
 .otp{
     @include regContainer;
-    justify-content: space-evenly;
+    justify-content: space-between;
+    height: 20rem;
 }
 
 .otp_heading{
@@ -12,3 +13,4 @@
 .otp_form{
     @include regForm;
 }
+

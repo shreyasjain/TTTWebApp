@@ -1,11 +1,13 @@
 .footer_buttons{
-    height: 3.5rem; 
-    position: fixed; 
-    bottom:0%;
-    width:100%; 
-    background-color: #393838; 
+    background: white;
+    height: 4rem;
+    position: fixed;
+    bottom: 0%;
+    width: 100%;
     opacity: 1;
     display: flex;
+    font-size: 13px;
+    text-align: center;
     .footer_button{
         width: 50%;
         display: flex;

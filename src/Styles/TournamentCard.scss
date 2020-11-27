@@ -4,9 +4,9 @@
     border: 1px solid lightgray;
     border-radius: 5px;
     box-shadow: 0 0px 15px lightgrey;
-    margin: 10px;
-    justify-content: center;
-    padding: 15px;
+    margin: 5px;
+    justify-content: start;
+    padding: 10px;
 }
 
 .tc_pic img{
@@ -16,15 +16,16 @@
     width: 70px !important;
     border-radius: 40px;
     margin-left: 0px; 
-    margin-right: 1rem;
+    margin-right: 2rem !important;
 }
 
 .tc_details{
+    text-align: left;
     p{
         margin-top: 0;
         margin-bottom: 10px;
         font-weight: bolder;
-        font-size: 15px;
+        font-size: 17px;
     }
     
     .tcd_l{

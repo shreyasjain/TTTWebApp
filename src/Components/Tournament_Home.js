@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import "../Styles/Tournament_Home.scss"
 import FooterButtons from './FooterButtons'
-import { Button, ButtonGroup } from 'react-bootstrap'
+import { Nav } from 'react-bootstrap'
 import TournamentCard from './TournamentCard'
 import Axios from 'axios'
-import {useHistory} from "react-router-dom"
+import { useHistory } from "react-router-dom"
+import NoTournamentScreen from './NoTournamentScreen'
 
 function Tournament_Home() {
 
@@ -39,30 +40,18 @@ function Tournament_Home() {
             .catch(err => { console.log(err) })
     })
 
-    const createCalled = (e =>{
+    const createCalled = (e => {
         // e.preventDefault()
         history.push("/createTournament")
     })
 
-    
 
+    useEffect(() => {
+        document.getElementById("footer-tournament-btn").click()
+        document.getElementById("default_btn").click()
+    }, [1])
 
     return (
-
-
-        // <div className="tournament">
-        //     <div className="tournament_heading">
-        //         <strong>Tournaments</strong>
-        //     </div>
-        //     <div className="tournament_content">
-        //         <p>Create your first tournament.</p>
-        //         <Button>Create</Button>
-        //     </div>
-
-        //     <FooterButtons />
-        // </div>
-
-
         <div className="tournament_available">
             <div className="tournament_content_available">
                 <div className="tournament_heading">
@@ -70,19 +59,27 @@ function Tournament_Home() {
                 </div>
 
                 <div className="tournament_buttons_top">
-                    <ButtonGroup aria-label="Basic example">
-                        <Button id="default_button1" onClick={e => ongoingClicked(e)} variant="secondary">Ongoing</Button>
-                        <Button onClick={e => upcomingClicked(e)} variant="secondary">Upcoming</Button>
-                        <Button onClick={e => previousClicked(e)} variant="secondary">Previous</Button>
-                    </ButtonGroup>
+                    <Nav variant="tabs" defaultActiveKey="/home">
+                        <Nav.Item>
+                            <Nav.Link eventKey="link-1" onClick={e => ongoingClicked(e)}>Ongoing</Nav.Link>
+                        </Nav.Item>
+                        <Nav.Item>
+                            <Nav.Link eventKey="link-2" id="default_btn" onClick={e => upcomingClicked(e)}>Upcoming</Nav.Link>
+                        </Nav.Item>
+                        <Nav.Item>
+                            <Nav.Link eventKey="link-3" onClick={e => previousClicked(e)}>Previous</Nav.Link>
+                        </Nav.Item>
+                    </Nav>
                 </div>
 
                 <button id="fixedbutton" onClick={e => createCalled(e)}>+</button>
 
                 <div className="tournament_cards_container" id="tournament_home_div">
-                    {currentData.map(data =>{
-                        return(<TournamentCard key={temp++} startDate={data.startDate} players={data.players} name={data.name} />)
-                    })}
+                    {currentData ? currentData.map(data => {
+                        return (<TournamentCard key={temp++} id={data.id} startDate={data.startDate} players={data.players} name={data.name} registrationLastDate={data.registrationLastDate.substring(0, 10)} />)
+                        // return (<NoTournamentScreen/>)
+                    })
+                        : (<NoTournamentScreen />)}
                 </div>
             </div>
             <FooterButtons />

@@ -4,12 +4,14 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: 20rem;
     text-align: center;
 }
 
 .addPlayers_heading{
-    @include appHeader;
+    @include backBtnHeading;
+    strong{
+        @include appHeader;
+    }
 } 
 
 .row{
@@ -22,6 +24,7 @@
 
 .myProfile_dp{
     @include profile_pic;
+    margin-bottom: 0;
     .myProfile_pic img{
         height: 6rem;
         width: 6rem;
@@ -41,4 +44,16 @@
             width: 70%;
         }
     }
+}
+
+input[type="file"] {
+    display: none;
+    margin-bottom: 2rem;
+}
+.custom-file-upload {
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+    margin-bottom: 1rem;
+    color: #007bff;;
 }

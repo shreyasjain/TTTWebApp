@@ -2,14 +2,11 @@
 
 .tournament{
     @include home;
+    height: 30rem;
 }
 
 .tournament_heading{
-    border-bottom: 1px solid lightgray;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    height: 3rem;
+    @include appHeading;
     strong{
         @include appHeader;
     }
@@ -17,6 +14,14 @@
 
 .tournament_available{
     @include home;
+}
+
+.tournament_content{
+    margin: auto;
+    p{
+        font-size: 1.5rem;
+    color: lightgray;
+    }
 }
 
 .tournament_buttons_top{
@@ -55,4 +60,39 @@ btn-secondary:not(:disabled):not(.disabled).active, .btn-secondary:not(:disabled
     color: #fff;
     background-color: #007bff;
     border-color: #007bff;
+}
+
+.nav{
+    margin: auto;
+}
+
+a {
+    color: lightslategray;
+}
+
+.nav-tabs .nav-link.active {
+    color: #007bff;
+}
+
+.nav-tabs .nav-link:focus, .nav-tabs .nav-link:hover {
+    border-color: transparent;
+    border-bottom: 3px solid #007bff;
+}
+
+.nav-tabs .nav-item {
+     margin-bottom: 0px; 
+}
+
+.nav-tabs {
+    border-bottom: 1px solid #dee2e6;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.nav-tabs .nav-link.active {
+    color: #007bff;
+    border-color: transparent;
+    border-bottom: 3px solid #007bff;
 }

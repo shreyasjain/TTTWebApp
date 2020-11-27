@@ -9,7 +9,7 @@ function MyProfile() {
     const [email,setEmail] = useState("")
 
     useEffect(() => {
-        Axios.get("http://139.59.16.180:8269/admin/profile/6",
+        Axios.get("http://139.59.16.180:8269/admin/profile",
             { headers: { Authorization: "Bearer " + localStorage.getItem("token") } }
         ).then(res => {
             setName(res.data.name)
@@ -18,6 +18,10 @@ function MyProfile() {
             .catch(err => console.log(err))
 
     },[1])
+
+    useEffect(() => {
+        document.getElementById("footer-profile-btn").click()
+    }, [1])
 
     return (
         <div className="myProfile">

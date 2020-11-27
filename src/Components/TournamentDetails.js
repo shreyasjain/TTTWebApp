@@ -2,33 +2,42 @@ import React, { useState } from 'react'
 import TournamentPlayedCard from './TournamentPlayedCard'
 import "../Styles/TournamentDetails.scss"
 import Axios from 'axios'
-import {useHistory} from "react-router-dom"
+import { useHistory } from "react-router-dom"
+
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
 function TournamentDetails() {
 
-    const id=6
-    const [currentData,setCurrentData] = useState([])
+    const id = localStorage.getItem("tournamentCardId")
+    const [currentData, setCurrentData] = useState([])
     const history = useHistory()
 
     Axios.get(`http://139.59.16.180:8269/tournament/details/${id}`)
-    .then(res => setCurrentData(res.data))
-    .catch(err => console.log(err))
-
-    const deleteCalled =(e =>{
-        e.preventDefault()
-        Axios.get(`http://139.59.16.180:8269/tournament/delete/${id}`,{ headers: { Authorization: "Bearer " + localStorage.getItem("token") } })
-        .then(res => console.log(res))
+        .then(res => setCurrentData(res.data))
         .catch(err => console.log(err))
+
+    const deleteCalled = (e => {
+        e.preventDefault()
+        Axios.get(`http://139.59.16.180:8269/tournament/delete/${id}`, { headers: { Authorization: "Bearer " + localStorage.getItem("token") } })
+            .then(res => console.log(res))
+            .catch(err => console.log(err))
     })
 
-    const updateCalled =(e =>{
+    const backClicked = (e) => {
+        e.preventDefault()
+        history.push("/tournments")
+    }
+
+    const updateCalled = (e => {
         history.push("/updateTournament")
     })
 
     return (
         <div className="tournament_details">
             <div className="tournament_details_heading">
+                <button id="back-button" onClick={e => backClicked(e)}><ArrowBackIcon /></button>
                 <strong>Tournament Details</strong>
+                <div></div>
             </div>
             <div className="tournament_details_container">
 
@@ -56,11 +65,11 @@ function TournamentDetails() {
                     </div>
                     <div className="played_tournaments">
                         <span>Singles</span>
-                        <br/>
+                        <br />
                         <span>Doubles</span>
-                        <br/>
+                        <br />
                         <span>Mixed Doubles</span>
-                        <br/>
+                        <br />
                     </div>
                 </div>
             </div>

@@ -4,17 +4,12 @@
     @include home;
 }
 
-.players_heading{
-    border-bottom: 1px solid lightgray;
+.players-heading{
+    @include appHeading;
     strong{
         @include appHeader;
     }
 } 
-
-.players_available{
-    @include home;
-    height: 0;
-}
 
 .player_card{
     display: flex;
@@ -34,6 +29,7 @@
         margin-top: 0;
         font-weight: bolder;
         font-size: 20px;
+        text-align: left;
     }
     
     .pd_sex{
@@ -41,3 +37,4 @@
     }
     
 }
+

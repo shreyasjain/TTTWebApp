@@ -1,15 +1,14 @@
 import firebase from "firebase"
 
 const firebaseConfig = {
-    apiKey: "AIzaSyB3a9NuWDDDrGf1UJS7j5Hf3QjvCg358Eg",
-    authDomain: "ttt-otp.firebaseapp.com",
-    databaseURL: "https://ttt-otp.firebaseio.com",
-    projectId: "ttt-otp",
-    storageBucket: "ttt-otp.appspot.com",
-    messagingSenderId: "1055868342062",
-    appId: "1:1055868342062:web:972fde09822ea94312b4bf",
-    measurementId: "G-LNPTBME1VW"
-  };
+  apiKey: "AIzaSyB_x9AuXcRvDA9GEmx9XA7FYW29kk1xqdE",
+  authDomain: "aurigatt.firebaseapp.com",
+  databaseURL: "https://aurigatt.firebaseio.com",
+  projectId: "aurigatt",
+  storageBucket: "aurigatt.appspot.com",
+  messagingSenderId: "1092695611524",
+  appId: "1:1092695611524:web:2b0059e12055ac8ea14ad1"
+};
 
 firebase.initializeApp(firebaseConfig)
 export default firebase

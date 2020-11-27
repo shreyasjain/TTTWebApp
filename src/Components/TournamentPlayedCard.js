@@ -4,7 +4,7 @@ import "../Styles/TournamentPlayedCard.scss"
 function TournamentPlayedCard() {
     return (
         <div className="tournament_played_card">
-            <div className="tc_pic">
+            <div className="tc_pic tc_pic1">
             <img src={require("../Media/dummy_dp.png")} alt="profile pic" />
             </div>
             <div className="player_details_1">

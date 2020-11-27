@@ -1,3 +1,22 @@
+@mixin appHeading {
+    border-bottom: 1px solid lightgray;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 3rem;
+    align-items: center;
+}
+
+@mixin backBtnHeading{
+    border-bottom: 1px solid lightgray;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    height: 3rem;
+    align-items: center;
+    border-bottom: 1px solid lightgray;
+}
+
 @mixin appHeader {
     font-size: 1rem;
 }

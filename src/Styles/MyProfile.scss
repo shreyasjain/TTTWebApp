@@ -5,9 +5,11 @@
     text-align: center;
 }
 
-.myProfile_heading strong{
+.myProfile_heading {
+    @include appHeading;
+    strong{
     @include appHeader;
-}
+}}
 
 .myProfile_banner{
     width: 100%;

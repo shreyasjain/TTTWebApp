@@ -1,8 +1,7 @@
 @import "HomeLayouts";
 
 .create_tournament_heading{
-    border-bottom: 1px solid lightgray;
-    text-align: center;
+    @include backBtnHeading;
     strong{
         @include appHeader;
     }
@@ -22,4 +21,9 @@
         font-size: 18px;
         font-weight: bold;
     }
+}
+
+#back-button{
+    background: transparent;
+    border: 0;
 }
