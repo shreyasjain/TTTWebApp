@@ -10,12 +10,14 @@
         justify-content: space-between;
     }    
     
-    .tc_pic img{
-        height: 50px;
-        width: 50px;
+    .draw_pic img{
+        height: 50px !important;
+        width: 50px !important;
         border-radius: 26px;
         margin-left: 10px;
-        margin-right: 1rem;
+        margin-right: 1rem !important;
+        box-shadow: 0 0 0 !important;
+        border: 1px solid;
     }
 
     .player_details{
@@ -26,15 +28,36 @@
     }
 }
 
-.player_card_row1{
+.draw_card_row1{
+    display: flex;
+    justify-content: space-between;
+}
+
+.draw_card_row1_data{
     display: flex;
 }
 
-.player_card_row1_data{
-    display: flex;
-}
-
-.player_card_row2{
+.draw_card_row2{
     margin-top: 15px;
     margin-left: 5px;
+}
+
+.seed-rank-button{
+    background: white;
+    border-radius: 5px;
+    margin-right: 10px;
+    border: 1px solid lightgray;
+}
+
+.draw-roundBtn{
+    background: green;
+    border-radius: 45px;
+    height: 30px;
+    width: 30px;
+    color: white;
+    font-size: 20px;
+}
+
+.draw-roundBtn1{
+    background: red;
 }

@@ -7,7 +7,7 @@ function NoPlayerScreen() {
         <div className="tournament">
             <div className="tournament_content">
                 <p>You have not added players.</p>
-                <Button>Add Now</Button>
+                <Button href="/addPlayer">Add Now</Button>
             </div>
         </div>
     )

@@ -15,9 +15,10 @@ function Matches() {
                         View Matches For:
                             </Form.Label>
                     <Col lg="8">
-                        <Form.Control as="select" defaultValue="Choose...">
-                            <option>Choose...</option>
-                            <option>...</option>
+                        <Form.Control as="select" defaultValue="Choose..." title="Choose">
+                            <option>Singles</option>
+                            <option>Doubles</option>
+                            <option>Mixed</option>
                         </Form.Control>
                     </Col>
                 </Form.Group>

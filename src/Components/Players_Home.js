@@ -35,14 +35,14 @@ function Players_Home() {
             <div className="players-heading">
                 <strong>Players</strong>
             </div>
-            <div className="player_cards_container">
-                {currentData ? currentData.map(data => {
+            <div className="player_cards_container" style={{"marginBottom":"4rem"}}>
+                {currentData!="" ? currentData.map(data => {
                     return (<PlayerCard key={data.id} id={data.id} name={data.name} age={data.age} gender={data.gender} registrationLastDate={data.registrationLastDate} />)
-                    // return (<NoPlayerScreen />)
                 })
                     : (<NoPlayerScreen />)}
             </div>
-            <button id="fixedbutton" onClick={e => addCalled(e)}>+</button>
+            {/* <button className="fixedbutton" onClick={e=>{addPlayer(e)}}>+</button> */}
+            <button className="fixedbutton" onClick={e => addCalled(e)}>+</button>
             <FooterButtons />
         </div>
     )

@@ -15,7 +15,7 @@ function SignUp(props) {
 
     const postIt = (e) => {
         e.preventDefault()
-
+        console.log(e)
         //Blank Entries
         if (username === "" || email === "" || password === "" || password1 === "") {
             alert("Please fill all entries.")
@@ -58,13 +58,14 @@ function SignUp(props) {
                 else {
                     document.getElementById("error_message4").innerHTML = "<p>Something went wrong</p>"
                 }
-                return
+                alert("Error")
+                history.push("/signup")
             });
 
         // sendOtp
         const otp = Math.floor(Math.random() * 9000 + 1000)
         localStorage.setItem("otp", otp)
-        const API_KEY = "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"
+        const API_KEY = "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"
         sgmail.setApiKey(API_KEY)
         const message = {
             to: email,
@@ -76,7 +77,7 @@ function SignUp(props) {
         sgmail.send(message)
             .then(res => {
                 alert("Otp sent. Check your Email.")
-                localStorage.setItem("enableOtpScreen",true)
+                localStorage.setItem("enableOtpScreen", true)
                 history.push("/otp")
             })
             .catch(err => {
@@ -92,10 +93,10 @@ function SignUp(props) {
                 <h1>SignUp</h1>
             </div>
             <div className="signup_form">
-                <Form>
+                <Form onSubmit={postIt}>
                     <div className="error_message" id="error_message1" ></div>
                     <Form.Group controlId="formBasicUsername">
-                        <Form.Control type="text" placeholder="Enter Name" onChange={event => setUsername(event.target.value)} />
+                        <Form.Control required type="text" placeholder="Enter Name" onChange={event => setUsername(event.target.value)} />
                     </Form.Group>
                     <div className="error_message" id="error_message2" ></div>
                     <Form.Group controlId="formBasicEmail">
@@ -109,7 +110,7 @@ function SignUp(props) {
                         <Form.Control type="password" placeholder="Password" onChange={event => setPassword1(event.target.value)} />
                     </Form.Group>
                     <div className="error_message" id="error_message4" ></div>
-                    <Button variant="primary" type="submit" onClick={(e) => postIt(e)}>Submit</Button>
+                    <Button variant="primary" type="submit" >Submit</Button>
                 </Form>
             </div>
             <div className="reg_footer_note">

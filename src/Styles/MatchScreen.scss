@@ -3,6 +3,7 @@
 .match-screen_heading{
     border-bottom: 1px solid lightgray;
     text-align: center;
+    @include backBtnHeading;
     strong{
         @include appHeader;
     }

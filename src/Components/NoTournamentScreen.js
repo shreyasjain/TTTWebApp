@@ -7,7 +7,7 @@ function NoTournamentScreen() {
         <div className="tournament">
             <div className="tournament_content">
                 <p>Create your first tournament.</p>
-                <Button>Create Now</Button>
+                <Button href="/createTournament">Create Now</Button>
             </div>
         </div>
     )

@@ -72,12 +72,11 @@ function Tournament_Home() {
                     </Nav>
                 </div>
 
-                <button id="fixedbutton" onClick={e => createCalled(e)}>+</button>
+                <button className="fixedbutton" onClick={e => createCalled(e)}>+</button>
 
-                <div className="tournament_cards_container" id="tournament_home_div">
-                    {currentData ? currentData.map(data => {
+                <div className="tournament_cards_container" style={{"marginBottom":"4rem"}} id="tournament_home_div">
+                    {currentData!="" ? currentData.map(data => {
                         return (<TournamentCard key={temp++} id={data.id} startDate={data.startDate} players={data.players} name={data.name} registrationLastDate={data.registrationLastDate.substring(0, 10)} />)
-                        // return (<NoTournamentScreen/>)
                     })
                         : (<NoTournamentScreen />)}
                 </div>

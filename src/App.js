@@ -18,7 +18,7 @@ import CreateDraws from './Components/CreateDraws';
 import Matches from './Components/Matches';
 import UpdateTournament from './Components/UpdateTournament';
 import Fixtures from './Components/Fixtures';
-import Test from "./Components/test"
+import UpdatePlayer from './Components/UpdatePlayer';
 
 function App() {
   return (
@@ -26,7 +26,7 @@ function App() {
       <div className="App">
 
         <Switch>
-          <Route exact path="/test"><Test/></Route>
+          <Route exact path="/updatePlayer"><UpdatePlayer /></Route>
           <Route exact path="/fixtures"><Fixtures /></Route>
           <Route exact path="/updateTournament"><UpdateTournament /></Route>
           <Route exact path="/matches"><Matches /></Route>

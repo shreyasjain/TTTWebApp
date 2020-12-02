@@ -13,8 +13,7 @@ function CreateTournament() {
     const [regEndDate, setRegEndDate] = useState("")
     const [maxScore, setMaxScore] = useState("")
     const [image, setImage] = useState("")
-    const [matches, setMatches] = useState([])
-    
+
     const backClicked = (e) => {
         e.preventDefault()
         history.push("/tournaments")
@@ -23,14 +22,15 @@ function CreateTournament() {
     const createClicked = (e => {
         e.preventDefault()
 
-        let array = []
+        //Set Matches Array
+        let matches = []
         let checkboxes = document.getElementsByClassName("ct-checkbox")
         for (var i = 0; i < checkboxes.length; i++) {
-            array.push(checkboxes[i].value)
+            if (checkboxes[i].checked) {
+                matches.push(checkboxes[i].value)
+            }
         }
-        console.log(checkboxes)
-        // setMatches(array)
-        console.log(array)
+        console.log(matches)
 
         //Blank Entries
         if (name === "" || startDate === "" || regEndDate === "" || maxScore === "" || image === "") {
@@ -121,6 +121,39 @@ function CreateTournament() {
 
                         <div className="create_tournament_checkboxes">
                             <h5>Matches In The Tournament</h5>
+                            <label className="container">
+                                <input type="checkbox" className=" ct-checkbox" value="Men's Singles" />
+                                <span class="checkmark"></span>
+                                Men's Singles
+                        </label>
+
+                            <label className="container">
+                                <input type="checkbox" className=" ct-checkbox" value="Women's Singles" />
+                                <span class="checkmark"></span>
+                                Women's Singles
+                        </label>
+
+                            <label className="container">
+                                <input type="checkbox" className=" ct-checkbox" value="Men's Doubles" />
+                                <span class="checkmark"></span>
+                                Men's Doubles
+                        </label>
+
+                            <label className="container">
+                                <input type="checkbox" className=" ct-checkbox" value="Women's Doubles" />
+                                <span class="checkmark"></span>
+                                Women's Doubles
+                        </label>
+
+                            <label className="container">
+                                <input type="checkbox" className=" ct-checkbox" value="Mixed Doubles" />
+                                <span class="checkmark"></span>
+                              
+                                Mixed Doubles
+                        </label>
+                        </div>
+                        {/* <div className="create_tournament_checkboxes">
+                            <h5>Matches In The Tournament</h5>
                             {['checkbox'].map((type) => (
                                 <div key={`custom-inline-${type}`} className="mb-3 ct-checkbox">
                                     <Form.Check
@@ -181,7 +214,7 @@ function CreateTournament() {
                                     />
                                 </div>
                             ))}
-                        </div>
+                        </div> */}
                         <Button variant="primary" type="submit" onClick={e => createClicked(e)}>Save</Button>
                     </Form>
                 </div>

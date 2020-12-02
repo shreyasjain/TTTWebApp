@@ -14,6 +14,7 @@ body,
   display: inline-block;
   margin-bottom: 30px;
   cursor: pointer;
+  display: none;
 }
 .brackets > div {
   vertical-align: top;
@@ -25,7 +26,7 @@ body,
   
 }
 .brackets > div > div > div {
-    margin: 50px 0;
+    margin: 100px 0;
 }
 .brackets div.bracketbox {
   position: relative;
@@ -104,18 +105,18 @@ body,
   width: 13.3%;
 }
 .brackets > div > .r1 > div {
-  height: 60px;
+  height: 120px;
 }
 .brackets > div > .r2 > div {
-  margin: 80px 0 110px 0;
-  height: 110px;
-}
-.brackets > div > .r3 > div {
-  margin: 135px 0 220px 0;
+  margin: 160px 0 220px 0;
   height: 220px;
 }
+.brackets > div > .r3 > div {
+  margin: 270px 0 440px 0;
+  height: 440px;
+}
 .brackets > div > .r4 > div {
-  margin: 250px 0 445px 0;
+  margin: 500px 0 445px 0;
   height: 445px;
 }
 .brackets > div > .r5 > div {
@@ -148,5 +149,74 @@ body,
 }
 
 .fixtures_heading{
-	max-width: 300px;
+	max-width: 24rem;
+}
+
+#dropdown-basic-button, #dropdown-basic-button:hover, #dropdown-basic-button:focus, #dropdown-basic-button:not(:disabled):not(.disabled).active, #dropdown-basic-button:not(:disabled):not(.disabled):active, .show>#dropdown-basic-button.dropdown-toggle {
+  color: #000;
+  background-color: white;
+  border-color: lightgray;
+  box-shadow: none;
+  margin-left: 15px;
+}
+
+.show{
+  display: inline-block;
+  top: 50px;
+}
+
+.fixtures_menu{
+  padding: 15px;
+}
+
+h4 {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+}
+
+.fixtures_heading {
+  max-width: 24rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.bracketbox {
+
+
+.teama{
+  margin-top: -25px;
+  div{
+    margin-left: 20px;
+    border: 1px solid lightgray;
+    width: 135px;
+  }
+}
+
+.teamb{
+  margin-top: 13px;
+  div{
+    margin-left: 20px;
+    border: 1px solid lightgray;
+    width: 135px;
+  }
+}
+
+.team-r3, .team-r4{
+border: 0 !important;
+}
+
+.team-r1{
+  background: lightgray;
+}
+
+.team-r2{
+  background: white;
+}
+
+.r3{
+  .teamb{
+    margin-top:340px;
+  }
+}
 }
