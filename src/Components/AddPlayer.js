@@ -49,6 +49,8 @@ function AddPlayer() {
 
         formData.append("theWrapper", JSON.stringify(theWrapper))
 
+        // console.log(formData)
+
         Axios.post("http://139.59.16.180:8269/player/add",
             formData,
             { headers: { Authorization: "Bearer " + localStorage.getItem("token") } }

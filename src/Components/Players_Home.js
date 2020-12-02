@@ -37,7 +37,7 @@ function Players_Home() {
             </div>
             <div className="player_cards_container" style={{"marginBottom":"4rem"}}>
                 {currentData!="" ? currentData.map(data => {
-                    return (<PlayerCard key={data.id} id={data.id} name={data.name} age={data.age} gender={data.gender} registrationLastDate={data.registrationLastDate} />)
+                    return (<PlayerCard key={data.id} id={data.id} name={data.name} age={data.age} gender={data.gender} registrationLastDate={data.registrationLastDate} image ={data.imageUrl} />)
                 })
                     : (<NoPlayerScreen />)}
             </div>

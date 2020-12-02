@@ -1,90 +1,116 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "../Styles/Fixtures.scss";
 import $ from "jquery";
 import _ from "underscore";
 import { Dropdown, DropdownButton } from "react-bootstrap";
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-import {useHistory} from "react-router-dom";
+import { useHistory } from "react-router-dom";
+import Axios from "axios";
 
-const someteams = [
-  "New Jersey ",
-  "New York ",
-  "New York ",
-  "Philadelphia ",
-  "New Jersey ",
-  "New York ",
-  "New York ",
-  "Philadelphia ",
-  "New Jersey ",
-  "New York ",
-  "New York ",
-  "Philadelphia ",
-  "New Jersey ",
-  "New York ",
-  "New York ",
-  "Philadelphia ",
-  "New Jersey Devils",
-  "New York Islanders",
-  "New York Rangers",
-  "Philadelphia Flyers",
-  "New Jersey Devils",
-  "New York Islanders",
-  "New York Rangers",
-  "Philadelphia Flyers",
-  "New Jersey Devils",
-  "New York Islanders",
-  "New York Rangers",
-  "Philadelphia Flyers",
-  "New Jersey Devils",
-  "New York Islanders",
-  "New York Rangers",
-  "Philadelphia Flyers",
-  "New Jersey Devils",
-  "New York Islanders",
-  "New York Rangers",
-  "Philadelphia Flyers",
-  "New Jersey Devils",
-  "New York Islanders",
-  "New York Rangers",
-  "Philadelphia Flyers",
-  "Pittsburgh Penguins",
-  "Boston Bruins",
-  "Buffalo Sabres",
-  "Montreal Canadiens",
-  "Ottawa Senators",
-  "Toronto Maple Leafs",
-  "Carolina Hurricanes",
-  "Florida Panthers",
-  "Tampa Bay Lightning",
-  "Washington Capitals",
-  "Winnipeg Jets",
-  "Chicago Blackhawks",
-  "Columbus Blue Jackets",
-  "Detroit Red Wings",
-  "Nashville Predators",
-  "St. Louis Blues",
-  "Calgary Flames",
-  "Colorado Avalanche",
-  "Edmonton Oilers",
-  "Minnesota Wild",
-  "Vancouver Canucks",
-  "Anaheim Ducks",
-  "Dallas Stars",
-  "Los Angeles Kings",
-  "Phoenix Coyotes",
-  "San Jose Sharks",
-  "Montreal Wanderers",
-  "Quebec Nordiques",
-  "Hartford Whalers"
-];
+
+
+// const someteams = [
+//   "New Jersey ",
+//   "New York ",
+//   "New York ",
+//   "Philadelphia ",
+//   "New Jersey ",
+//   "New York ",
+//   "New York ",
+//   "Philadelphia ",
+//   "New Jersey ",
+//   "New York ",
+//   "New York ",
+//   "Philadelphia ",
+//   "New Jersey ",
+//   "New York ",
+//   "New York ",
+//   "Philadelphia ",
+//   "New Jersey Devils",
+//   "New York Islanders",
+//   "New York Rangers",
+//   "Philadelphia Flyers",
+//   "New Jersey Devils",
+//   "New York Islanders",
+//   "New York Rangers",
+//   "Philadelphia Flyers",
+//   "New Jersey Devils",
+//   "New York Islanders",
+//   "New York Rangers",
+//   "Philadelphia Flyers",
+//   "New Jersey Devils",
+//   "New York Islanders",
+//   "New York Rangers",
+//   "Philadelphia Flyers",
+//   "New Jersey Devils",
+//   "New York Islanders",
+//   "New York Rangers",
+//   "Philadelphia Flyers",
+//   "New Jersey Devils",
+//   "New York Islanders",
+//   "New York Rangers",
+//   "Philadelphia Flyers",
+//   "Pittsburgh Penguins",
+//   "Boston Bruins",
+//   "Buffalo Sabres",
+//   "Montreal Canadiens",
+//   "Ottawa Senators",
+//   "Toronto Maple Leafs",
+//   "Carolina Hurricanes",
+//   "Florida Panthers",
+//   "Tampa Bay Lightning",
+//   "Washington Capitals",
+//   "Winnipeg Jets",
+//   "Chicago Blackhawks",
+//   "Columbus Blue Jackets",
+//   "Detroit Red Wings",
+//   "Nashville Predators",
+//   "St. Louis Blues",
+//   "Calgary Flames",
+//   "Colorado Avalanche",
+//   "Edmonton Oilers",
+//   "Minnesota Wild",
+//   "Vancouver Canucks",
+//   "Anaheim Ducks",
+//   "Dallas Stars",
+//   "Los Angeles Kings",
+//   "Phoenix Coyotes",
+//   "San Jose Sharks",
+//   "Montreal Wanderers",
+//   "Quebec Nordiques",
+//   "Hartford Whalers"
+// ];
 
 export default function Fixtures() {
+
+  // const id = localStorage.getItem("tournamentCardId")
+  const id =3
+  // const [currentData,setCurrentData] = useState("")
+  let currentData = []
+  useEffect(() => {
+    Axios.get(`http://139.59.16.180:8269/fixture/allFixtures/${id}`,
+    { headers: { Authorization: "Bearer " + localStorage.getItem("token") } }
+    )
+      .then(res => {
+        console.log(res.data)
+        console.log(res.data[0].id)
+         currentData = res.data.map(data=>{
+          return(data.player1)
+        })
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  },[])
 
   const history = useHistory()
 
   var knownBrackets = [2, 4, 8, 16, 32, 64], // brackets with "perfect" proportions (full fields, no byes)
 
-    exampleTeams = _.shuffle(["New Jersey Devils", "New York Islanders", "New York Rangers", "Philadelphia Flyers", "New Jersey Devils", "New York Islanders", "New York Rangers", "Philadelphia Flyers", "New Jersey Devils", "New York Islanders", "New York Rangers", "Philadelphia Flyers", "New Jersey Devils", "New York Islanders", "New York Rangers", "Philadelphia Flyers", "New Jersey Devils", "New York Islanders", "New York Rangers", "Philadelphia Flyers", "New Jersey Devils", "New York Islanders", "New York Rangers", "Philadelphia Flyers", "New Jersey Devils", "New York Islanders", "New York Rangers", "Philadelphia Flyers", "New Jersey Devils", "New York Islanders", "New York Rangers", "Philadelphia Flyers", "New Jersey Devils", "New York Islanders", "New York Rangers", "Philadelphia Flyers", "New Jersey Devils", "New York Islanders", "New York Rangers", "Philadelphia Flyers", "Pittsburgh Penguins", "Boston Bruins", "Buffalo Sabres", "Montreal Canadiens", "Ottawa Senators", "Toronto Maple Leafs", "Carolina Hurricanes", "Florida Panthers", "Tampa Bay Lightning", "Washington Capitals", "Winnipeg Jets", "Chicago Blackhawks", "Columbus Blue Jackets", "Detroit Red Wings", "Nashville Predators", "St. Louis Blues", "Calgary Flames", "Colorado Avalanche", "Edmonton Oilers", "Minnesota Wild", "Vancouver Canucks", "Anaheim Ducks", "Dallas Stars", "Los Angeles Kings", "Phoenix Coyotes", "San Jose Sharks", "Montreal Wanderers", "Quebec Nordiques", "Hartford Whalers"]), // because a bracket needs some teams!
+    exampleTeams = _.shuffle(
+      // ["New Jersey Devils", "New York Islanders", "New York Rangers", "Philadelphia Flyers", "New Jersey Devils", "New York Islanders", "New York Rangers", "Philadelphia Flyers", "New Jersey Devils", "New York Islanders", "New York Rangers", "Philadelphia Flyers", "New Jersey Devils", "New York Islanders", "New York Rangers", "Philadelphia Flyers", "New Jersey Devils", "New York Islanders", "New York Rangers", "Philadelphia Flyers", "New Jersey Devils", "New York Islanders", "New York Rangers", "Philadelphia Flyers", "New Jersey Devils", "New York Islanders", "New York Rangers", "Philadelphia Flyers", "New Jersey Devils", "New York Islanders", "New York Rangers", "Philadelphia Flyers", "New Jersey Devils", "New York Islanders", "New York Rangers", "Philadelphia Flyers", "New Jersey Devils", "New York Islanders", "New York Rangers", "Philadelphia Flyers", "Pittsburgh Penguins", "Boston Bruins", "Buffalo Sabres", "Montreal Canadiens", "Ottawa Senators", "Toronto Maple Leafs", "Carolina Hurricanes", "Florida Panthers", "Tampa Bay Lightning", "Washington Capitals", "Winnipeg Jets", "Chicago Blackhawks", "Columbus Blue Jackets", "Detroit Red Wings", "Nashville Predators", "St. Louis Blues", "Calgary Flames", "Colorado Avalanche", "Edmonton Oilers", "Minnesota Wild", "Vancouver Canucks", "Anaheim Ducks", "Dallas Stars", "Los Angeles Kings", "Phoenix Coyotes", "San Jose Sharks", "Montreal Wanderers", "Quebec Nordiques", "Hartford Whalers"]
+      currentData
+      ), // because a bracket needs some teams!
     bracketCount = 0; console.log($(exampleTeams).length);
 
   const getBracket = ((base) => {
@@ -147,6 +173,7 @@ export default function Fixtures() {
           round.append('<div></div>');
         else
           round.append('<div><div class="bracketbox"><span class="info1"></span><span class="info2"></span><div class="teama"><div class="team-r1">Team1</div><div class="team-r2">Team2</div><div class="team-r3">data</div><div class="team-r4">data</div></div><div class="teamb"><div class="team-r1">Team1</div><div class="team-r2">Team2</div><div class="team-r3">data</div><div class="team-r4">data</div></div></div>');
+          // round.append('<div><div class="bracketbox"><span class="info1">'+gg.bracketNo+'</span><span class="info2">'+gg.bracketNo+'</span><span class="teama">'+gg.teamnames[0]+'</span><span class="teamb">'+gg.teamnames[1]+'</span></div></div>');
       });
       group.append(round);
     }
@@ -161,7 +188,7 @@ export default function Fixtures() {
 
   const addBracket = (() => {
     // var opts = parseInt(prompt('Bracket size (number of teams):',32));
-    var opts = 8;
+    var opts = 7;
 
     if (!_.isNaN(opts) && opts <= _.last(knownBrackets))
       getBracket(opts);
@@ -178,14 +205,14 @@ export default function Fixtures() {
     document.getElementById("add").click()
   }, [])
 
-  const backClicked = (e)=>{
+  const backClicked = (e) => {
     history.push("/")
   }
 
   return (
     <div style={{ minWidth: "1000px" }}>
       <div className="tournament_heading fixtures_heading">
-      <button id="back-button" onClick={e => backClicked(e)}><ArrowBackIcon /></button>
+        <button id="back-button" onClick={e => backClicked(e)}><ArrowBackIcon /></button>
         <strong>Fixtures</strong>
         <div></div>
       </div>
@@ -193,15 +220,15 @@ export default function Fixtures() {
         Add Bracket
       </div>
       <div className="fixtures_menu">
-      <h4>Tournament Name</h4>
-      <form>
-        <label>View for:</label>
-        <DropdownButton id="dropdown-basic-button" title="type">
-          <Dropdown.Item href="#/action-1">Singles</Dropdown.Item>
-          <Dropdown.Item href="#/action-2">Doubles</Dropdown.Item>
-          <Dropdown.Item href="#/action-3">Mixed</Dropdown.Item>
-        </DropdownButton>
-      </form>
+        <h4>Tournament Name</h4>
+        <form>
+          <label>View for:</label>
+          <DropdownButton id="dropdown-basic-button" title="type">
+            <Dropdown.Item href="#/action-1">Singles</Dropdown.Item>
+            <Dropdown.Item href="#/action-2">Doubles</Dropdown.Item>
+            <Dropdown.Item href="#/action-3">Mixed</Dropdown.Item>
+          </DropdownButton>
+        </form>
       </div>
       <div className="brackets" id="brackets"></div>
     </div>

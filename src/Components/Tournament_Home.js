@@ -76,7 +76,7 @@ function Tournament_Home() {
 
                 <div className="tournament_cards_container" style={{"marginBottom":"4rem"}} id="tournament_home_div">
                     {currentData!="" ? currentData.map(data => {
-                        return (<TournamentCard key={temp++} id={data.id} startDate={data.startDate} players={data.players} name={data.name} registrationLastDate={data.registrationLastDate.substring(0, 10)} />)
+                        return (<TournamentCard key={data.id} id={data.id} startDate={data.startDate} players={data.players} name={data.name} registrationLastDate={data.registrationLastDate.substring(0, 10)} />)
                     })
                         : (<NoTournamentScreen />)}
                 </div>

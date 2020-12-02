@@ -6,6 +6,8 @@ import {useHistory} from "react-router-dom"
 function PlayerCard(props) {
     const history = useHistory();
 
+    // console.log(props.image)
+
     const cardClicked = (e =>{
         e.preventDefault()
         localStorage.setItem("playerCardId",props.id)
@@ -22,7 +24,7 @@ function PlayerCard(props) {
     return (
         <div className="player_card" onClick={e=>cardClicked(e)}>
             <div className="tc_pic">
-            <img src={require("../Media/dummy_dp.png")} alt="profile pic" />
+            <img src={props.image} alt="profile pic" />
             </div>
             <div className="player_details">
                 <p>{props.name}</p>

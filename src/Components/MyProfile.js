@@ -9,6 +9,14 @@ function MyProfile() {
     const [name,setName] = useState("")
     const [email,setEmail] = useState("")
     const history = useHistory()
+
+    // useEffect(()=>{
+    //     const status = localStorage.getItem("isLoggedIn")
+    //     console.log(status)
+    //     if(status===false){
+    //         history.push("/")
+    //     }
+    // })
     
     useEffect(() => {
 

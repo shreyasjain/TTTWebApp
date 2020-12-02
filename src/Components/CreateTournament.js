@@ -97,10 +97,10 @@ function CreateTournament() {
                             <Form.Control type="text" placeholder="Tournament Name" onChange={e => setName(e.target.value)} />
                         </Form.Group>
                         <Form.Group controlId="formBasicText">
-                            <Form.Control type="text" placeholder="Start Date (DD/MM/YY)" onChange={e => setStartDate(e.target.value)} />
+                            <Form.Control type="date" placeholder="Start Date (DD/MM/YY)" onChange={e => setStartDate(e.target.value)} />
                         </Form.Group>
                         <Form.Group controlId="formBasicText">
-                            <Form.Control type="text" placeholder="Registration End Date" onChange={e => setRegEndDate(e.target.value)} />
+                            <Form.Control type="date" placeholder="Registration End Date" onChange={e => setRegEndDate(e.target.value)} />
                         </Form.Group>
                         <Form.Group className="row_align" as={Row} controlId="formPlaintextPassword">
                             <Form.Label column sm="4">
