@@ -44,15 +44,16 @@
 
 .fixedbutton {
     position: fixed;
-    bottom: 85px;
+    bottom: 80px;
     right: 50px;
     background: #007bff;
     height: 50px;
     width: 50px;
-    border-radius: 25px;
+    border-radius: 50%;
     text-align: center;
     color: white;
-    font-size: 35px;
+    font-size: 40px;
+    line-height: 0px;
 }
 
 

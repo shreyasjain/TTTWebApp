@@ -16,6 +16,7 @@
 
 @mixin regForm{
     width: 80%;
+    max-width: 40rem;
     Button{
         width: 70%;
         margin-left: 15%;

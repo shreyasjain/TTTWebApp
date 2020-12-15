@@ -5,20 +5,43 @@ import Axios from 'axios'
 import { useHistory } from "react-router-dom"
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+import {Modal, Button} from "react-bootstrap"
 
 function PlayerDetails() {
-
+    
     const id = localStorage.getItem("playerCardId")
     const [currentData, setCurrentData] = useState([])
     const history = useHistory()
-
+    const [modalShow1, setModalShow1] = useState(false)
+    function MyVerticallyCenteredModal(props) {
+        return (
+            <Modal
+                {...props}
+                size="lg"
+                aria-labelledby="contained-modal-title-vcenter"
+                centered
+            >
+                <Modal.Body>
+                    <h4>{props.heading}</h4>
+                    <p>
+                        {props.message}
+                    </p>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button onClick={props.onHide}>Close</Button>
+                </Modal.Footer>
+            </Modal>
+        );
+    }
+    // if(!localStorage.getItem("token")){
+    //     history.push("/")
+    // }
     const myFunction = (e)=>{
         e.preventDefault()
         document.getElementById("myDropdown").classList.toggle("show");
     }
 
     const updatePlayer = (e)=>{
-        e.preventDefault()
         e.preventDefault()
         localStorage.setItem("playerToUpdate",id)
         history.push("/updatePlayer")
@@ -29,18 +52,19 @@ function PlayerDetails() {
         Axios.delete(`http://139.59.16.180:8269/player/delete/${id}`,
         { headers: { Authorization: "Bearer " + localStorage.getItem("token") } })
         .then(res => {
-            alert("Player deleted.")
+            setModalShow1(true)
+            // alert("Player deleted.")
             history.push("/players")
         })
-        .catch(err => alert(err.message))
+        .catch(err => console.log(err.message))
     }
 
     useEffect(() => {
         Axios.get(`http://139.59.16.180:8269/player/details/${id}`,
             { headers: { Authorization: "Bearer " + localStorage.getItem("token") } })
             .then(res => {
-                console.log(res.data)
-                setCurrentData(res.data)
+                console.log(res.data.data)
+                setCurrentData(res.data.data)
             })
             .catch(err => console.log(err))
 
@@ -97,6 +121,11 @@ function PlayerDetails() {
                         <TournamentPlayedCard />
                     </div>
                 </div>
+                <MyVerticallyCenteredModal
+                        message="Player Deleted Successfully."
+                        show={modalShow1}
+                        onHide={() => {setModalShow1(false);history.push("/players");}}
+                    />
             </div>
         </div>
     )

@@ -1,18 +1,46 @@
 import React, { useState } from 'react'
 import "../Styles/CreateTournament.scss"
-import { Button, Form, Row, Col } from 'react-bootstrap'
+import { Button, Form, Row, Col, Modal } from 'react-bootstrap'
 import Axios from 'axios'
 import { useHistory } from "react-router-dom"
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
 function CreateTournament() {
-
+    
     const history = useHistory()
+    // if(!localStorage.getItem("token")){
+    //     history.push("/")
+    // }
     const [name, setName] = useState("")
     const [startDate, setStartDate] = useState("")
     const [regEndDate, setRegEndDate] = useState("")
     const [maxScore, setMaxScore] = useState("")
-    const [image, setImage] = useState("")
+    const [displayPic,setDisplayPic] = useState(require("../Media/dummy_dp.png"))
+    const [image, setImage] = useState(null)
+    const [modalShow1,setModalShow1] = useState(false)
+    const [endDate,setEndDate] = useState("")
+    
+    function MyVerticallyCenteredModal(props) {
+        return (
+            <Modal
+                {...props}
+                size="lg"
+                aria-labelledby="contained-modal-title-vcenter"
+                centered
+            >
+                <Modal.Body>
+                    <p>
+                        {props.message}
+              </p>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button onClick={props.onHide}>Close</Button>
+                </Modal.Footer>
+            </Modal>
+        );
+    }
+
+    // if(1<2){setModalShow1(true)}
 
     const backClicked = (e) => {
         e.preventDefault()
@@ -34,7 +62,8 @@ function CreateTournament() {
 
         //Blank Entries
         if (name === "" || startDate === "" || regEndDate === "" || maxScore === "" || image === "") {
-            alert("Please fill all entries.")
+            // alert("Please fill all entries.")
+            document.getElementById("error_message1").innerHTML="<p>Please fill all entries.</p>"
             return
         }
 
@@ -50,10 +79,7 @@ function CreateTournament() {
                 "status": "upcoming",
                 "createdDate": 1605605229000,
                 "modifiedDate": 1605605229000,
-                "players": [
-                    "ketan",
-                    "rusmeen",
-                    "rahul"]
+                "endDate":endDate
             }
         }
 
@@ -64,13 +90,29 @@ function CreateTournament() {
             { headers: { Authorization: "Bearer " + localStorage.getItem("token") } }
         ).then(res => {
             console.log(res)
-            alert("Tournament created successfully")
-            history.push("/tournaments")
+            setModalShow1(true)
+            
         })
-            .catch(err => { alert(err.message) })
+            .catch(err => { document.getElementById("error_message1").innerHTML="<p>Something went wrong.</p>" })
     })
 
-
+const handlePhoto = (e)=>{
+    e.preventDefault()
+    const reader = new FileReader();
+        reader.onload=()=>{
+            if(reader.readyState===2){
+                console.log('here')
+                setDisplayPic(reader.result)
+                console.log(reader.result)
+            }
+        }
+        reader.readAsDataURL(e.currentTarget.files[0])
+       
+        console.log("here in photo Change")
+        console.log(e.currentTarget.files[0])
+        setImage(e.currentTarget.files[0])
+        console.log("obj=",URL.createObjectURL(e.currentTarget.files[0]))
+}
 
     return (
         <div className="create-tournament">
@@ -81,7 +123,7 @@ function CreateTournament() {
             </div>
             <div className="myProfile_dp">
                 <div className="myProfile_pic">
-                    <img src={require("../Media/dummy_dp.png")} alt="profile pic" />
+                    <img src={displayPic} alt="profile pic" />
                 </div>
             </div>
             <div className="addPlayer_form">
@@ -91,14 +133,24 @@ function CreateTournament() {
                             <i className="fa fa-cloud-upload"></i> Add image
                         </label>
                         <input type="file" id="file-upload"
-                            onChange={e => setImage(e.target.files[0])}
+                            onChange={e => {
+                                // setImage(`require(${e.target.files[0]})`);
+                        handlePhoto(e)
+                        }}
                         />
+                        <div className="error_message" id="error_message1" ></div>
                         <Form.Group controlId="formBasicText">
                             <Form.Control type="text" placeholder="Tournament Name" onChange={e => setName(e.target.value)} />
                         </Form.Group>
+                        <div className="ct-labels"><label>Start Date:</label></div>
                         <Form.Group controlId="formBasicText">
-                            <Form.Control type="date" placeholder="Start Date (DD/MM/YY)" onChange={e => setStartDate(e.target.value)} />
+                            <Form.Control type="date" placeholder="Start Date" onChange={e => setStartDate(e.target.value)} />
                         </Form.Group>
+                        <div className="ct-labels"><label>End Date:</label></div>
+                        <Form.Group controlId="formBasicText">
+                            <Form.Control type="date" placeholder="Start Date" onChange={e => setEndDate(e.target.value)} />
+                        </Form.Group>
+                        <div className="ct-labels"><label>Registration End Date:</label></div>
                         <Form.Group controlId="formBasicText">
                             <Form.Control type="date" placeholder="Registration End Date" onChange={e => setRegEndDate(e.target.value)} />
                         </Form.Group>
@@ -121,102 +173,45 @@ function CreateTournament() {
 
                         <div className="create_tournament_checkboxes">
                             <h5>Matches In The Tournament</h5>
-                            <label className="container">
+                            <label className="container123">
                                 <input type="checkbox" className=" ct-checkbox" value="Men's Singles" />
                                 <span class="checkmark"></span>
                                 Men's Singles
                         </label>
 
-                            <label className="container">
+                            <label className="container123">
                                 <input type="checkbox" className=" ct-checkbox" value="Women's Singles" />
                                 <span class="checkmark"></span>
                                 Women's Singles
                         </label>
 
-                            <label className="container">
+                            <label className="container123">
                                 <input type="checkbox" className=" ct-checkbox" value="Men's Doubles" />
                                 <span class="checkmark"></span>
                                 Men's Doubles
                         </label>
 
-                            <label className="container">
+                            <label className="container123">
                                 <input type="checkbox" className=" ct-checkbox" value="Women's Doubles" />
                                 <span class="checkmark"></span>
                                 Women's Doubles
                         </label>
 
-                            <label className="container">
+                            <label className="container123">
                                 <input type="checkbox" className=" ct-checkbox" value="Mixed Doubles" />
                                 <span class="checkmark"></span>
                               
                                 Mixed Doubles
                         </label>
                         </div>
-                        {/* <div className="create_tournament_checkboxes">
-                            <h5>Matches In The Tournament</h5>
-                            {['checkbox'].map((type) => (
-                                <div key={`custom-inline-${type}`} className="mb-3 ct-checkbox">
-                                    <Form.Check
-                                        custom
-                                        inline
-                                        value="Men's singles"
-                                        label="Men's singles"
-                                        type={type}
-                                        id={`custom-inline-${type}-1`}
-                                    />
-                                </div>
-                            ))}
-                            {['checkbox'].map((type) => (
-                                <div key={`custom-inline-${type}`} className="mb-3 ct-checkbox">
-                                    <Form.Check
-                                        custom
-                                        inline
-                                        value="Women's singles"
-                                        label="Women's singles"
-                                        type={type}
-                                        id={`custom-inline-${type}-2`}
-                                    />
-                                </div>
-                            ))}
-                            {['checkbox'].map((type) => (
-                                <div key={`custom-inline-${type}`} className="mb-3 ct-checkbox">
-                                    <Form.Check
-                                        custom
-                                        inline
-                                        value="Men's doubles"
-                                        label="Men's doubles"
-                                        type={type}
-                                        id={`custom-inline-${type}-3`}
-                                    />
-                                </div>
-                            ))}
-                            {['checkbox'].map((type) => (
-                                <div key={`custom-inline-${type}`} className="mb-3 ct-checkbox">
-                                    <Form.Check
-                                        custom
-                                        inline
-                                        value="Women's doubles"
-                                        label="Women's doubles"
-                                        type={type}
-                                        id={`custom-inline-${type}-4`}
-                                    />
-                                </div>
-                            ))}
-                            {['checkbox'].map((type) => (
-                                <div key={`custom-inline-${type}`} className="mb-3 ct-checkbox">
-                                    <Form.Check
-                                        custom
-                                        inline
-                                        value="Mixed doubles"
-                                        label="Mixed doubles"
-                                        type={type}
-                                        id={`custom-inline-${type}-5`}
-                                    />
-                                </div>
-                            ))}
-                        </div> */}
+                       
                         <Button variant="primary" type="submit" onClick={e => createClicked(e)}>Save</Button>
                     </Form>
+                    <MyVerticallyCenteredModal
+                        message="Tournament Created Successfully."
+                        show={modalShow1}
+                        onHide={() => {setModalShow1(false);history.push("/tournaments");}}
+                    />
                 </div>
             </div>
         </div>

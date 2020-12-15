@@ -2,6 +2,9 @@ import React from 'react'
 import "../Styles/TournamentPlayedCard.scss"
 
 function TournamentPlayedCard() {
+    // if(!localStorage.getItem("token")){
+    //     history.push("/")
+    // }
     return (
         <div className="tournament_played_card">
             <div className="tc_pic tc_pic1">

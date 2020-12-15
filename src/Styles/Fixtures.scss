@@ -184,7 +184,7 @@ h4 {
 .bracketbox {
 
 
-.teama{
+#teama{
   margin-top: -25px;
   div{
     margin-left: 20px;
@@ -193,17 +193,51 @@ h4 {
   }
 }
 
-.teamb{
+#teamb{
   margin-top: 13px;
   div{
     margin-left: 20px;
     border: 1px solid lightgray;
     width: 135px;
   }
+}}
+
+#r2 #teamb{
+  margin-top: 115px;
 }
 
-// .r1 > .teamb{
-//   margin-top: 13px !important;
+#r3 #teamb{
+  margin-top: 335px;
+}
+
+#brackets{
+  margin-top: -75px;
+}
+// .r1 #teamb{
+//   margin-top: 13px;
+//   div{
+//     margin-left: 20px;
+//     border: 1px solid lightgray;
+//     width: 135px;
+//   }
+// }
+
+// #r2 #teamb{
+//   margin-top: 13px;
+//   div{
+//     margin-left: 20px;
+//     border: 1px solid lightgray;
+//     width: 135px;
+//   }
+// }
+
+// #r3 #teamb{
+//   margin-top: 13px;
+//   div{
+//     margin-left: 20px;
+//     border: 1px solid lightgray;
+//     width: 135px;
+//   }
 // }
 
 .team-r3, .team-r4{
@@ -222,5 +256,4 @@ border: 0 !important;
   .teamb{
     margin-top:340px;
   }
-}
 }

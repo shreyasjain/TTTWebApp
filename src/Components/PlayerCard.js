@@ -5,7 +5,7 @@ import {useHistory} from "react-router-dom"
 
 function PlayerCard(props) {
     const history = useHistory();
-
+    
     // console.log(props.image)
 
     const cardClicked = (e =>{
@@ -22,9 +22,9 @@ function PlayerCard(props) {
         //         .catch(err => console.log(err))
     })
     return (
-        <div className="player_card" onClick={e=>cardClicked(e)}>
+        <div className="player_card ttapp-card" onClick={e=>cardClicked(e)}>
             <div className="tc_pic">
-            <img src={props.image} alt="profile pic" />
+            <img src={require("../Media/dummy_dp.png")} alt="profile pic" />
             </div>
             <div className="player_details">
                 <p>{props.name}</p>

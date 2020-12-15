@@ -6,36 +6,52 @@ import TournamentCard from './TournamentCard'
 import Axios from 'axios'
 import { useHistory } from "react-router-dom"
 import NoTournamentScreen from './NoTournamentScreen'
+import { Link, Redirect} from "react-router-dom"
 
 function Tournament_Home() {
-
+   
     let [currentData, setCurrentData] = useState([])
     let temp = 0
     const history = useHistory();
 
+    // if(!localStorage.getItem("token")){
+    //     window.location.href=("/login")
+
+    // }
+
+    useEffect(() => {
+        document.getElementById("footer-tournament-btn").click()
+        document.getElementById("default_btn").click()
+    }, [])
+
+    
+    
     const ongoingClicked = (e => {
-        Axios.get("http://139.59.16.180:8269/tournament/onGoing")
+        Axios.get("http://139.59.16.180:8269/tournament/onGoing",
+        { headers: { Authorization: "Bearer " + localStorage.getItem("token") }})
             .then(res => {
-                console.log(res.data)
-                setCurrentData(res.data)
+                console.log(res.data.data)
+                setCurrentData(res.data.data)
             })
             .catch(err => { console.log(err) })
     })
 
     const upcomingClicked = (e => {
-        Axios.get("http://139.59.16.180:8269/tournament/upComing")
+        Axios.get("http://139.59.16.180:8269/tournament/upComing",
+        { headers: { Authorization: "Bearer " + localStorage.getItem("token") }})
             .then(res => {
-                console.log(res)
-                setCurrentData(res.data)
+                console.log(res.data.data)
+                setCurrentData(res.data.data)
             })
             .catch(err => { console.log(err) })
     })
 
     const previousClicked = (e => {
-        Axios.get("http://139.59.16.180:8269/tournament/completed")
+        Axios.get("http://139.59.16.180:8269/tournament/completed",
+        { headers: { Authorization: "Bearer " + localStorage.getItem("token") }})
             .then(res => {
                 console.log(res)
-                setCurrentData(res.data)
+                setCurrentData(res.data.data)
             })
             .catch(err => { console.log(err) })
     })
@@ -46,10 +62,7 @@ function Tournament_Home() {
     })
 
 
-    useEffect(() => {
-        document.getElementById("footer-tournament-btn").click()
-        document.getElementById("default_btn").click()
-    }, [1])
+    
 
     return (
         <div className="tournament_available">
@@ -72,10 +85,10 @@ function Tournament_Home() {
                     </Nav>
                 </div>
 
-                <button className="fixedbutton" onClick={e => createCalled(e)}>+</button>
+                <button className="fixedbutton round-btns" onClick={e => createCalled(e)}>+</button>
 
                 <div className="tournament_cards_container" style={{"marginBottom":"4rem"}} id="tournament_home_div">
-                    {currentData!="" ? currentData.map(data => {
+                    {currentData!="" && currentData ? currentData.map(data => {
                         return (<TournamentCard key={data.id} id={data.id} startDate={data.startDate} players={data.players} name={data.name} registrationLastDate={data.registrationLastDate.substring(0, 10)} />)
                     })
                         : (<NoTournamentScreen />)}

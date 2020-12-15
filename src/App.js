@@ -19,13 +19,14 @@ import Matches from './Components/Matches';
 import UpdateTournament from './Components/UpdateTournament';
 import Fixtures from './Components/Fixtures';
 import UpdatePlayer from './Components/UpdatePlayer';
+import Cropper from './Components/Cropper';
 
 function App() {
   return (
-    <Router>
+    <Router basename="/shreyas">
       <div className="App">
-
         <Switch>
+        <Route exact path="/cropper"><Cropper /></Route>
           <Route exact path="/updatePlayer"><UpdatePlayer /></Route>
           <Route exact path="/fixtures"><Fixtures /></Route>
           <Route exact path="/updateTournament"><UpdateTournament /></Route>

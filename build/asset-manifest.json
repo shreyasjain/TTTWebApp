@@ -1,0 +1,27 @@
+{
+  "files": {
+    "main.css": "/shreyas/static/css/main.53df08c6.chunk.css",
+    "main.js": "/shreyas/static/js/main.bd7a1b84.chunk.js",
+    "main.js.map": "/shreyas/static/js/main.bd7a1b84.chunk.js.map",
+    "runtime-main.js": "/shreyas/static/js/runtime-main.b760de40.js",
+    "runtime-main.js.map": "/shreyas/static/js/runtime-main.b760de40.js.map",
+    "static/css/2.2b78e78b.chunk.css": "/shreyas/static/css/2.2b78e78b.chunk.css",
+    "static/js/2.da488ec6.chunk.js": "/shreyas/static/js/2.da488ec6.chunk.js",
+    "static/js/2.da488ec6.chunk.js.map": "/shreyas/static/js/2.da488ec6.chunk.js.map",
+    "index.html": "/shreyas/index.html",
+    "precache-manifest.d8a745ec8188228b4729a78a7f96629c.js": "/shreyas/precache-manifest.d8a745ec8188228b4729a78a7f96629c.js",
+    "service-worker.js": "/shreyas/service-worker.js",
+    "static/css/2.2b78e78b.chunk.css.map": "/shreyas/static/css/2.2b78e78b.chunk.css.map",
+    "static/css/main.53df08c6.chunk.css.map": "/shreyas/static/css/main.53df08c6.chunk.css.map",
+    "static/js/2.da488ec6.chunk.js.LICENSE.txt": "/shreyas/static/js/2.da488ec6.chunk.js.LICENSE.txt",
+    "static/media/dummy_dp.png": "/shreyas/static/media/dummy_dp.9acfe78b.png",
+    "static/media/welcome.png": "/shreyas/static/media/welcome.14725d0e.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.b760de40.js",
+    "static/css/2.2b78e78b.chunk.css",
+    "static/js/2.da488ec6.chunk.js",
+    "static/css/main.53df08c6.chunk.css",
+    "static/js/main.bd7a1b84.chunk.js"
+  ]
+}

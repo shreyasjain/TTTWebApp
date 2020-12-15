@@ -1,13 +1,13 @@
 import React from 'react'
 import "../Styles/footerButtons.scss"
 import PersonOutlineIcon from '@material-ui/icons/PersonOutline';
-import HelpOutlineIcon from '@material-ui/icons/HelpOutline';
+import SportsTennisIcon from '@material-ui/icons/SportsTennis';
 import SportsHandballIcon from '@material-ui/icons/SportsHandball';
 import { useHistory } from "react-router-dom"
 import { Nav } from "react-bootstrap"
 
 function FooterButtons() {
-
+    
     const history = useHistory()
 
     const tournamentClicked = (e => {
@@ -29,10 +29,11 @@ function FooterButtons() {
         <div className="footer_buttons">
             <Nav variant="tabs" defaultActiveKey="/home">
                 <Nav.Item>
-                    <Nav.Link eventKey="link-1" id="footer-tournament-btn" onClick={e => tournamentClicked(e)}><SportsHandballIcon /><p>Tournments</p></Nav.Link>
+                    <Nav.Link eventKey="link-1" id="footer-tournament-btn" onClick={e => tournamentClicked(e)}><SportsTennisIcon />
+                    <p  >Tournments</p></Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                    <Nav.Link eventKey="link-2" id="footer-players-btn" onClick={e => playersClicked(e)}><HelpOutlineIcon /><p>Players</p></Nav.Link>
+                    <Nav.Link eventKey="link-2" id="footer-players-btn" onClick={e => playersClicked(e)}><SportsHandballIcon /><p>Players</p></Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
                     <Nav.Link eventKey="link-3" id="footer-profile-btn" onClick={e => myProfileClicked(e)}><PersonOutlineIcon /><p>Profile</p></Nav.Link>

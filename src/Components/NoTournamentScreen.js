@@ -3,6 +3,7 @@ import { Button } from 'react-bootstrap'
 import FooterButtons from './FooterButtons'
 
 function NoTournamentScreen() {
+
     return (
         <div className="tournament">
             <div className="tournament_content">

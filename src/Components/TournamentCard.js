@@ -3,7 +3,7 @@ import "../Styles/TournamentCard.scss"
 import {useHistory} from "react-router-dom"
 
 function TournamentCard(props) {
-
+    
     const history = useHistory();
     const tournamentCardClicked = (e =>{
         e.preventDefault()
@@ -12,7 +12,7 @@ function TournamentCard(props) {
     })
 
     return (
-        <div className="tournament_card" onClick={e=>tournamentCardClicked(e)}>
+        <div className="tournament_card ttapp-card" onClick={e=>tournamentCardClicked(e)}>
             <div className="tc_pic">
                 <img src={require("../Media/welcome.png")} />
             </div>

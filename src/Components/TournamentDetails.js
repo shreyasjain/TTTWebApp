@@ -5,25 +5,65 @@ import Axios from 'axios'
 import { useHistory } from "react-router-dom"
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import EditIcon from '@material-ui/icons/Edit';
+import {Modal, Button} from "react-bootstrap"
 
 function TournamentDetails() {
-
+    
     const id = localStorage.getItem("tournamentCardId")
     const [currentData, setCurrentData] = useState([])
+    const [matchesCreated,setMatchesCreated] = useState("")
+    const [modalShow1, setModalShow1] = useState(false)
+    function MyVerticallyCenteredModal(props) {
+        return (
+            <Modal
+                {...props}
+                size="lg"
+                aria-labelledby="contained-modal-title-vcenter"
+                centered
+            >
+                <Modal.Body>
+                    <h4>{props.heading}</h4>
+                    <p>
+                        {props.message}
+                    </p>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button onClick={props.onHide}>Close</Button>
+                </Modal.Footer>
+            </Modal>
+        );
+    }
     const history = useHistory()
-
+    // if(!localStorage.getItem("token")){
+    //     history.push("/")
+    // }
     const myFunction = (e)=>{
         e.preventDefault()
         document.getElementById("myDropdown").classList.toggle("show");
     }
 
     useEffect(() => {
-        Axios.get(`http://139.59.16.180:8269/tournament/details/${id}`)
+        Axios.get(`http://139.59.16.180:8269/tournament/details/${id}`,
+        { headers: { Authorization: "Bearer " + localStorage.getItem("token") }})
             .then(res => {
-                setCurrentData(res.data)
-                console.log(res.data)
+                console.log(res.data.data)
+                setCurrentData(res.data.data)
+                
             })
             .catch(err => console.log(err))
+
+            Axios.get(`http://139.59.16.180:8269/fixture/allFixtures/${id}`,
+        { headers: { Authorization: "Bearer " + localStorage.getItem("token") } })
+        .then(res=>{
+            setMatchesCreated(true)
+            
+        })
+        .catch(err=>{
+            setMatchesCreated(false)
+        })
+
+
     }, [])
 
     const backClicked = (e) => {
@@ -53,7 +93,8 @@ function TournamentDetails() {
                 "status": "upcoming",
                 "createdDate": 1605605229000,
                 "modifiedDate": 1605605229000,
-                "players": currentData.players
+                "players": currentData.players,
+                "endDate":currentData.endDate
             }
         }
 
@@ -67,7 +108,7 @@ function TournamentDetails() {
             alert("Tournament cloned successfully")
             history.push("/tournaments")
         })
-            .catch(err => { alert(err.message) })
+            .catch(err => { console.log(err.message) })
     }
 
     const deleteTournament = (e)=>{
@@ -76,14 +117,19 @@ function TournamentDetails() {
         Axios.delete(`http://139.59.16.180:8269/tournament/delete/${id}`,
         { headers: { Authorization: "Bearer " + localStorage.getItem("token") } })
         .then(res => {
-            alert("Tournament deleted.")
+            setModalShow1(true)
+            // alert("Tournament deleted.")
             history.push("/tournaments")
         })
-        .catch(err => alert(err.message))
+        .catch(err => console.log(err.message))
     }
 
     const createDrawsClicked = (e)=>{
         history.push("/createDraws")
+    }
+
+    const viewDrawsClicked = (e)=>{
+        history.push("/matches")
     }
 
     return (
@@ -114,7 +160,7 @@ function TournamentDetails() {
                     <span>{currentData.maxSetScore}</span>
                     <br />
                     <span className="span_l">Total Players:   </span>
-                    <span>{(currentData != "") ? currentData.players.length : (<></>)}</span>
+                    <span>{(currentData.players) ? currentData.players.length : (<>0</>)}</span>
                 </div>
 
                 {/* <div className="fixed_buttons">
@@ -137,13 +183,20 @@ function TournamentDetails() {
                         })
                             : (<p>No Matches</p>)}
                     </div>
-                    <button onClick={e=>{updateClicked(e)}} className="fixedbutton">i</button>
-                    <div>
-                        <button className="create-draws-btn" onClick={e=>{createDrawsClicked(e)}}>Create Draws</button>
+                    <button onClick={e=>{updateClicked(e)}} className="fixedbutton round-btns"><EditIcon/></button>
+                    <div>{matchesCreated?
+                    <button className="create-draws-btn td-btn" onClick={e=>{viewDrawsClicked(e)}}>View Matches</button>
+                    :<button className="create-draws-btn td-btn" onClick={e=>{createDrawsClicked(e)}}>Add Players</button>}
+                        
                     </div>
                     
                 </div>
             </div>
+            <MyVerticallyCenteredModal
+                        message="Tournament Deleted Successfully."
+                        show={modalShow1}
+                        onHide={() => {setModalShow1(false);history.push("/players");}}
+                    />
         </div>
     )
 }

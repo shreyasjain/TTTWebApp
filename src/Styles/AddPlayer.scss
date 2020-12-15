@@ -57,3 +57,12 @@ input[type="file"] {
     margin-bottom: 1rem;
     color: #007bff;;
 }
+
+@media (min-width: 992px){
+.col-lg-1 {
+    max-width: 100%;
+}}
+
+.cropper-input{
+    display: inline !important;
+}

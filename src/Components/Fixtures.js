@@ -7,110 +7,70 @@ import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import { useHistory } from "react-router-dom";
 import Axios from "axios";
 
-
-
-// const someteams = [
-//   "New Jersey ",
-//   "New York ",
-//   "New York ",
-//   "Philadelphia ",
-//   "New Jersey ",
-//   "New York ",
-//   "New York ",
-//   "Philadelphia ",
-//   "New Jersey ",
-//   "New York ",
-//   "New York ",
-//   "Philadelphia ",
-//   "New Jersey ",
-//   "New York ",
-//   "New York ",
-//   "Philadelphia ",
-//   "New Jersey Devils",
-//   "New York Islanders",
-//   "New York Rangers",
-//   "Philadelphia Flyers",
-//   "New Jersey Devils",
-//   "New York Islanders",
-//   "New York Rangers",
-//   "Philadelphia Flyers",
-//   "New Jersey Devils",
-//   "New York Islanders",
-//   "New York Rangers",
-//   "Philadelphia Flyers",
-//   "New Jersey Devils",
-//   "New York Islanders",
-//   "New York Rangers",
-//   "Philadelphia Flyers",
-//   "New Jersey Devils",
-//   "New York Islanders",
-//   "New York Rangers",
-//   "Philadelphia Flyers",
-//   "New Jersey Devils",
-//   "New York Islanders",
-//   "New York Rangers",
-//   "Philadelphia Flyers",
-//   "Pittsburgh Penguins",
-//   "Boston Bruins",
-//   "Buffalo Sabres",
-//   "Montreal Canadiens",
-//   "Ottawa Senators",
-//   "Toronto Maple Leafs",
-//   "Carolina Hurricanes",
-//   "Florida Panthers",
-//   "Tampa Bay Lightning",
-//   "Washington Capitals",
-//   "Winnipeg Jets",
-//   "Chicago Blackhawks",
-//   "Columbus Blue Jackets",
-//   "Detroit Red Wings",
-//   "Nashville Predators",
-//   "St. Louis Blues",
-//   "Calgary Flames",
-//   "Colorado Avalanche",
-//   "Edmonton Oilers",
-//   "Minnesota Wild",
-//   "Vancouver Canucks",
-//   "Anaheim Ducks",
-//   "Dallas Stars",
-//   "Los Angeles Kings",
-//   "Phoenix Coyotes",
-//   "San Jose Sharks",
-//   "Montreal Wanderers",
-//   "Quebec Nordiques",
-//   "Hartford Whalers"
-// ];
-
 export default function Fixtures() {
-
-  // const id = localStorage.getItem("tournamentCardId")
-  const id =3
-  // const [currentData,setCurrentData] = useState("")
-  let currentData = []
+ 
+  const id = localStorage.getItem("tournamentCardId")
+  // const id =3
+  let temp = []
   useEffect(() => {
+    
     Axios.get(`http://139.59.16.180:8269/fixture/allFixtures/${id}`,
     { headers: { Authorization: "Bearer " + localStorage.getItem("token") } }
     )
       .then(res => {
         console.log(res.data)
         console.log(res.data[0].id)
-         currentData = res.data.map(data=>{
-          return(data.player1)
+        
+        res.data.map(data=>{
+          let temp1 = []
+          Axios.get(`http://139.59.16.180:8269/fixture/details/${data.id}`,
+          { headers: { Authorization: "Bearer " + localStorage.getItem("token") } }
+          )
+          .then(res => {
+            console.log(res.data)
+            Axios.get(`http://139.59.16.180:8269/player/details/${res.data.player1}`,
+            { headers: { Authorization: "Bearer " + localStorage.getItem("token") } })
+            .then(res=>{
+              console.log("P1 "+res.data.name)
+              temp1.push(res.data.name)
+            })
+            .catch(err => console.log(err))
+            Axios.get(`http://139.59.16.180:8269/player/details/${res.data.player2}`,
+            { headers: { Authorization: "Bearer " + localStorage.getItem("token") } })
+            .then(res=>{
+              console.log("P2 "+res.data.name)
+              temp1.push(res.data.name)
+            })
+            .catch(err => console.log(err))
+          })
+          .catch(err =>{
+            console.log(err)
+          })
+          temp.push(temp1)
+          console.log(temp)
         })
+
+        // console.log(currentData)
       })
       .catch(err => {
         console.log(err)
       })
+
+
   },[])
 
   const history = useHistory()
 
+//   if(!localStorage.getItem("token")){
+//     history.push("/")
+// }
+
   var knownBrackets = [2, 4, 8, 16, 32, 64], // brackets with "perfect" proportions (full fields, no byes)
 
-    exampleTeams = _.shuffle(
-      // ["New Jersey Devils", "New York Islanders", "New York Rangers", "Philadelphia Flyers", "New Jersey Devils", "New York Islanders", "New York Rangers", "Philadelphia Flyers", "New Jersey Devils", "New York Islanders", "New York Rangers", "Philadelphia Flyers", "New Jersey Devils", "New York Islanders", "New York Rangers", "Philadelphia Flyers", "New Jersey Devils", "New York Islanders", "New York Rangers", "Philadelphia Flyers", "New Jersey Devils", "New York Islanders", "New York Rangers", "Philadelphia Flyers", "New Jersey Devils", "New York Islanders", "New York Rangers", "Philadelphia Flyers", "New Jersey Devils", "New York Islanders", "New York Rangers", "Philadelphia Flyers", "New Jersey Devils", "New York Islanders", "New York Rangers", "Philadelphia Flyers", "New Jersey Devils", "New York Islanders", "New York Rangers", "Philadelphia Flyers", "Pittsburgh Penguins", "Boston Bruins", "Buffalo Sabres", "Montreal Canadiens", "Ottawa Senators", "Toronto Maple Leafs", "Carolina Hurricanes", "Florida Panthers", "Tampa Bay Lightning", "Washington Capitals", "Winnipeg Jets", "Chicago Blackhawks", "Columbus Blue Jackets", "Detroit Red Wings", "Nashville Predators", "St. Louis Blues", "Calgary Flames", "Colorado Avalanche", "Edmonton Oilers", "Minnesota Wild", "Vancouver Canucks", "Anaheim Ducks", "Dallas Stars", "Los Angeles Kings", "Phoenix Coyotes", "San Jose Sharks", "Montreal Wanderers", "Quebec Nordiques", "Hartford Whalers"]
-      currentData
-      ), // because a bracket needs some teams!
+  exampleTeams = 
+  [[1,2],[3,4],[5,6],[7,8],[9,0],[11,12],[13,14],[15,16]]
+      //  ["shreyas","rohan","rohit","arpit","piyush","shailu","sachin","rusmeen","ketn","pranjali"]
+      , // because a bracket needs some teams!
     bracketCount = 0; console.log($(exampleTeams).length);
 
   const getBracket = ((base) => {
@@ -167,12 +127,13 @@ export default function Fixtures() {
       grouped = _.groupBy(struct, function (s) { return s.roundNo; });
     var g
     for (g = 1; g <= groupCount; g++) {
-      var round = $('<div class="r' + g + '"></div>');
+      var round = $('<div class="r' + g + '" id="r' + g + '"></div>');
       _.each(grouped[g], function (gg) {
+        // console.log(gg.teamnames[0])
         if (gg.bye)
           round.append('<div></div>');
         else
-          round.append('<div><div class="bracketbox"><span class="info1"></span><span class="info2"></span><div class="teama"><div class="team-r1">Team1</div><div class="team-r2">Team2</div><div class="team-r3">data</div><div class="team-r4">data</div></div><div class="teamb"><div class="team-r1">Team1</div><div class="team-r2">Team2</div><div class="team-r3">data</div><div class="team-r4">data</div></div></div>');
+          round.append('<div><div class="bracketbox"><span class="info1"></span><span class="info2"></span><div class="teama" id="teama"><div class="team-r1">'+gg.teamnames[0][0]+'</div><div class="team-r2">'+gg.teamnames[0][1]+'</div><div class="team-r3">data</div><div class="team-r4">data</div></div><div class="teamb" id="teamb"><div class="team-r1">'+gg.teamnames[1][0]+'</div><div class="team-r2">'+gg.teamnames[1][1]+'</div><div class="team-r3">data</div><div class="team-r4">data</div></div></div>');
           // round.append('<div><div class="bracketbox"><span class="info1">'+gg.bracketNo+'</span><span class="info2">'+gg.bracketNo+'</span><span class="teama">'+gg.teamnames[0]+'</span><span class="teamb">'+gg.teamnames[1]+'</span></div></div>');
       });
       group.append(round);
@@ -188,7 +149,7 @@ export default function Fixtures() {
 
   const addBracket = (() => {
     // var opts = parseInt(prompt('Bracket size (number of teams):',32));
-    var opts = 7;
+    var opts = 8;
 
     if (!_.isNaN(opts) && opts <= _.last(knownBrackets))
       getBracket(opts);
@@ -221,14 +182,14 @@ export default function Fixtures() {
       </div>
       <div className="fixtures_menu">
         <h4>Tournament Name</h4>
-        <form>
+        {/* <form>
           <label>View for:</label>
           <DropdownButton id="dropdown-basic-button" title="type">
             <Dropdown.Item href="#/action-1">Singles</Dropdown.Item>
             <Dropdown.Item href="#/action-2">Doubles</Dropdown.Item>
             <Dropdown.Item href="#/action-3">Mixed</Dropdown.Item>
           </DropdownButton>
-        </form>
+        </form> */}
       </div>
       <div className="brackets" id="brackets"></div>
     </div>

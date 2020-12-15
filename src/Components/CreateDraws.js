@@ -12,6 +12,9 @@ function CreateDraws() {
 
     // console.log(localStorage.getItem("tournamentCardId"))
 
+    const [input, setInput] = useState("")
+    const [search, setSearch] = useState([])
+
     let players = []
 
     const callbackFunction = (childData) => {
@@ -39,14 +42,16 @@ function CreateDraws() {
     // const [value,setValue] = useState("")
     const [matchType, setMatchType] = useState("")
     const history = useHistory()
-
+    // if(!localStorage.getItem("token")){
+    //     history.push("/")
+    // }
     useEffect(() => {
         Axios.get("http://139.59.16.180:8269/player/allPlayers",
             { headers: { Authorization: "Bearer " + localStorage.getItem("token") } })
             .then(res => {
-                console.log(res.data)
-                setCurrentData(res.data)
-
+                console.log(res.data.data[0])
+                setCurrentData(res.data.data)
+                setSearch(res.data.data)
             })
             .catch(err => { console.log(err) })
     }, [])
@@ -60,23 +65,24 @@ function CreateDraws() {
         }
         formData.append("id", localStorage.getItem("tournamentCardId"))
         console.log(players)
-        formData.append("playersAdded",JSON.stringify(players))
+        formData.append("playersAdded", JSON.stringify(players))
 
         // console.log(formData)
 
 
         Axios.post(`http://139.59.16.180:8269/fixture/create/${matchType}`,
-            formData
-            // { headers: { Authorization: "Bearer " + localStorage.getItem("token") } }
+            formData,
+            { headers: { Authorization: "Bearer " + localStorage.getItem("token") } }
         )
             .then(res => {
                 console.log(res)
+
                 history.push("/matches")
             })
             .catch(err => {
                 console.log(err)
             })
-        
+
     }
 
     const backClicked = (e) => {
@@ -84,8 +90,24 @@ function CreateDraws() {
     }
 
     const changeMatchType = (e) => {
-       setMatchType(e.target.value)
+        e.preventDefault()
+        setMatchType(e.target.value)
     }
+
+    const handleSearch = (e) => {
+        setInput(e.target.value.toLowerCase())
+    }
+
+    useEffect(() => {
+        if (currentData != "") {
+            const result = currentData.filter(data => {
+                if (data.name.toLowerCase().includes(input)) { return data }
+            })
+            setSearch(result)
+            console.log(result)
+        }
+
+    }, [input])
 
     return (
         <div className="create_draws">
@@ -100,8 +122,7 @@ function CreateDraws() {
                         Match type:
                             </Form.Label>
                     <Col lg="10">
-                        <Form.Control as="select" onChange={e => { changeMatchType(e) }} defaultValue="Choose...">
-                            <option value="" >Choose...</option>
+                        <Form.Control as="select" onChange={e => { changeMatchType(e) }} defaultValue="single">
                             <option value="single" >Singles</option>
                             <option value="Doubles" >Doubles</option>
                             <option value="Mixed" >Mixed</option>
@@ -109,7 +130,7 @@ function CreateDraws() {
                     </Col>
                 </Form.Group>
                 <Form.Group controlId="formBasicSearch">
-                    <Form.Control  type="text" placeholder="Search" />
+                    <Form.Control type="text" value={input} placeholder="Search" onChange={e => handleSearch(e)} />
                 </Form.Group>
             </div>
             <div className="create_draws_cards">
@@ -119,10 +140,14 @@ function CreateDraws() {
                 <CreateDrawCard name="" id={998} addCallback={callbackFunction} removeCallback={removeCallbackfn} />
                 <CreateDrawCard name="" id={999} addCallback={callbackFunction} removeCallback={removeCallbackfn} /> */}
 
-                {currentData != "" ? currentData.map(data => {
-                    return (<CreateDrawCard key={data.id} id={data.id} name={data.name} age={data.age} gender={data.gender} registrationLastDate={data.registrationLastDate} addCallback={callbackFunction} removeCallback={removeCallbackfn}/>)
-                })
-                    : (<NoPlayerScreen />)}
+                {(input == "" && currentData != "") ?
+                    currentData.map(data => {
+                        return <CreateDrawCard key={data.id} id={data.id} name={data.name} age={data.age} gender={data.gender} registrationLastDate={data.registrationLastDate} addCallback={callbackFunction} removeCallback={removeCallbackfn} />
+                    })
+                    : search.map(data => {
+                        return <CreateDrawCard key={data.id} id={data.id} name={data.name} age={data.age} gender={data.gender} registrationLastDate={data.registrationLastDate} addCallback={callbackFunction} removeCallback={removeCallbackfn} />
+                    })}
+
             </div>
             <div>
                 <button className="create-draws-btn" onClick={e => { generateDraws(e) }}>Generate Draws</button>

@@ -7,8 +7,8 @@
     display: flex;
     border: 1px solid lightgray;
     padding: 15px;
+    align-items: center;
     box-shadow: 0 0 10px lightgrey;
-    height: 150px;
 }
 
 .matches_card_left, .matches_card_right{
@@ -28,4 +28,24 @@
         margin-bottom: 0;
         margin-top: 10px;
     }
+}
+
+.matches_card_heading{
+    display: flex;
+    justify-content: space-between;
+    span{
+        font-size: 15px;
+        color: #aeb4b7;
+    }
+    
+}
+
+.matches_card_versus p{
+    background: #e4e6e7;
+    height: 35px;
+    width: 35px;
+    border-radius: 18px;
+    text-align: center;
+    padding-top: 5px;
+    margin-top: 1rem;
 }

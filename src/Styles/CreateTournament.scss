@@ -38,7 +38,7 @@
     border: 0;
 }
 
-.container {
+.container123 {
     display: block;
     position: relative;
     padding-left: 35px;
@@ -52,7 +52,7 @@
   }
   
   /* Hide the browser's default checkbox */
-  .container input {
+  .container123 input {
     position: absolute;
     opacity: 0;
     cursor: pointer;
@@ -71,12 +71,12 @@
   }
   
   /* On mouse-over, add a grey background color */
-  .container:hover input ~ .checkmark {
+  .container123:hover input ~ .checkmark {
     background-color: #ccc;
   }
   
   /* When the checkbox is checked, add a blue background */
-  .container input:checked ~ .checkmark {
+  .container123 input:checked ~ .checkmark {
     background-color: #007bff;
   }
   
@@ -88,12 +88,12 @@
   }
   
   /* Show the checkmark when checked */
-  .container input:checked ~ .checkmark:after {
+  .container123 input:checked ~ .checkmark:after {
     display: block;
   }
   
   /* Style the checkmark/indicator */
-  .container .checkmark:after {
+  .container123 .checkmark:after {
     left: 9px;
     top: 5px;
     width: 5px;
@@ -104,3 +104,17 @@
     -ms-transform: rotate(45deg);
     transform: rotate(45deg);
   }
+
+  .ct-labels{
+    text-align: left;
+  }
+
+  @media (min-width: 992px){
+.col-lg-10 {
+   flex: 1; 
+    max-width: 83.333333%;
+}}
+
+.ut-checkboxes{
+  padding-top: 0  ;
+}

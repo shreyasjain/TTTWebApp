@@ -1,38 +1,70 @@
 import React, { useState } from 'react'
 import "../Styles/AddPlayer.scss"
-import { Button, Form, Row, Col } from 'react-bootstrap'
+import { Button, Form, Row, Col, Modal } from 'react-bootstrap'
 import Axios from 'axios'
 import { useHistory } from "react-router-dom"
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
+
 function AddPlayer() {
 
     const history = useHistory()
-    const [image, setImage] = useState("")
+    const [displayPic,setDisplayPic] = useState(require("../Media/dummy_dp.png"))
+    const [image, setImage] = useState(null)
     const [name, setName] = useState("")
     const [email, setEmail] = useState("")
     const [gender, setGender] = useState("")
     const [age, setAge] = useState("")
+    const [modalShow1,setModalShow1] = useState(false)
     
+    function MyVerticallyCenteredModal(props) {
+        return (
+            <Modal
+                {...props}
+                size="lg"
+                aria-labelledby="contained-modal-title-vcenter"
+                centered
+            >
+                <Modal.Body>
+                    <h4>{props.heading}</h4>
+                    <p>
+                        {props.message}
+              </p>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button onClick={props.onHide}>Close</Button>
+                </Modal.Footer>
+            </Modal>
+        );
+    }
+
+    // if (!localStorage.getItem("token")) {
+    //     history.push("/")
+    // }
+
     const backClicked = (e) => {
         e.preventDefault()
         history.push("/players")
+        
     }
-    
+
     const submitAddPlayer = (e) => {
         e.preventDefault()
         console.log(gender)
 
         //Blank Entries
         if (name === "" || email === "" || gender === "" || age === "") {
-            alert("Please fill all entries.")
+            // alert("Please fill all entries.")
+            document.getElementById("error_message1").innerHTML="<p>Please fill all entries.</p>"
             return
         }
 
         //Validate Email
         var mailformat = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
         if (!email.match(mailformat)) {
-            alert("You have entered an invalid email address!");
+            // alert("You have entered an invalid email address!");
+            document.getElementById("error_message2").innerHTML="<p>You have entered an invalid email address!</p>"
+            
             return;
         }
 
@@ -56,22 +88,42 @@ function AddPlayer() {
             { headers: { Authorization: "Bearer " + localStorage.getItem("token") } }
         ).then(res => {
             console.log(res)
-            alert("Player added successfully.")
-            history.push("/players")
+            setModalShow1(true)
+            
         })
-            .catch(err => alert(err.messge))
+            .catch(err => document.getElementById("error_message1").innerHTML="<p>Something went wrong!</p>"
+            )
     }
+
+    const handlePhoto = (e)=>{
+        e.preventDefault()
+        const reader = new FileReader();
+            reader.onload=()=>{
+                if(reader.readyState===2){
+                    console.log('here')
+                    setDisplayPic(reader.result)
+                    console.log(reader.result)
+                }
+            }
+            reader.readAsDataURL(e.currentTarget.files[0])
+           
+            console.log("here in photo Change")
+            console.log(e.currentTarget.files[0])
+            setImage(e.currentTarget.files[0])
+            console.log("obj=",URL.createObjectURL(e.currentTarget.files[0]))
+    }
+
 
     return (
         <div className="addPlayer">
             <div className="addPlayers_heading">
-            <button id="back-button" onClick={e => backClicked(e)}><ArrowBackIcon /></button>
+                <button id="back-button" onClick={e => backClicked(e)}><ArrowBackIcon /></button>
                 <strong>Add Player</strong>
                 <div></div>
             </div>
             <div className="myProfile_dp">
                 <div className="myProfile_pic">
-                    <img src={require("../Media/dummy_dp.png")} alt="profile pic" />
+                    <img src={displayPic} alt="profile pic" />
                 </div>
 
                 {/* <a href="http://www.google.com">Add image</a> */}
@@ -79,12 +131,14 @@ function AddPlayer() {
             <div className="addPlayer_form">
                 <div className="addPlayer_form_contents">
                     <Form>
+                    <div className="error_message" id="error_message1" ></div>
                         <label htmlFor="file-upload" className="custom-file-upload">
                             <i className="fa fa-cloud-upload"></i> Add image
                         </label>
                         <input type="file" id="file-upload"
-                            onChange={e => setImage(e.target.files[0])}
+                            onChange={e => handlePhoto(e)}
                         />
+                         <div className="error_message" id="error_message2" ></div>
                         <Form.Group controlId="formBasicEmail">
                             <Form.Control type="text" placeholder="Enter name" onChange={e => { setName(e.target.value) }} />
                         </Form.Group>
@@ -113,6 +167,12 @@ function AddPlayer() {
                         </Form.Group>
                         <Button variant="primary" type="submit" onClick={e => submitAddPlayer(e)}>Submit</Button>
                     </Form>
+                    <MyVerticallyCenteredModal
+                        heading=""
+                        message="Player Added Successfully."
+                        show={modalShow1}
+                        onHide={() => {setModalShow1(false); history.push("/players");}}
+                    />
                 </div>
             </div>
 

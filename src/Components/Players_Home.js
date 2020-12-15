@@ -10,7 +10,10 @@ function Players_Home() {
     const history = useHistory();
     let [currentData, setCurrentData] = useState([])
     let temp = 0
+    // if(!localStorage.getItem("token")){
+    //     window.location.href=("/login")
 
+    // }
     const addCalled = (e)=>{
         history.push("/addPlayer")
     }
@@ -21,7 +24,7 @@ function Players_Home() {
             { headers: { Authorization: "Bearer " + localStorage.getItem("token") } })
             .then(res => {
                 console.log(res.data)
-                setCurrentData(res.data)
+                setCurrentData(res.data.data)
             })
             .catch(err => { console.log(err) })
     }, [])
@@ -36,13 +39,13 @@ function Players_Home() {
                 <strong>Players</strong>
             </div>
             <div className="player_cards_container" style={{"marginBottom":"4rem"}}>
-                {currentData!="" ? currentData.map(data => {
+                {currentData!="" && currentData ? currentData.map(data => {
                     return (<PlayerCard key={data.id} id={data.id} name={data.name} age={data.age} gender={data.gender} registrationLastDate={data.registrationLastDate} image ={data.imageUrl} />)
                 })
                     : (<NoPlayerScreen />)}
             </div>
             {/* <button className="fixedbutton" onClick={e=>{addPlayer(e)}}>+</button> */}
-            <button className="fixedbutton" onClick={e => addCalled(e)}>+</button>
+            <button className="fixedbutton round-btns" onClick={e => addCalled(e)}>+</button>
             <FooterButtons />
         </div>
     )
